@@ -1,10 +1,25 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   fdf.h                                              :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: garibeir < garibeir@student.42lisboa.com > +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/04/01 16:47:43 by garibeir          #+#    #+#             */
+/*   Updated: 2023/04/01 17:21:50 by garibeir         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef   FDF_H
 # define   FDF_H
 
 #include <unistd.h>
 #include <math.h>
 #include <stdlib.h>
+#include <stdio.h>
+#include <limits.h>
 #include "colors.h"
+#include <stdbool.h>
 #include "keyhandler.h"
 #include "./includes/libft/libft.h"
 #include "./includes/printf/ft_printf.h"
@@ -13,10 +28,12 @@
 
 #define WIDTH 1920
 #define HEIGHT 1080
+#define NAME "***************************************"
 
 typedef struct	s_win
  {
 	char	*addr;
+	char 	*win;
     int     width;
     int     height;
 	int		bits_per_pixel;
@@ -25,12 +42,12 @@ typedef struct	s_win
 
 }				t_win;
 
-typedef struct s_img 
+typedef struct s_imge 
 {
     void *img;
 
     
-} t_img;
+} t_imge;
 
 typedef struct s_point
 {
@@ -65,5 +82,9 @@ void swap(int* a , int*b);
 t_win    *cwin(void);
 t_img       *cimg(void);
 t_point     *cpoint(void);
+
+// Auxiliary functions
+void	*xmalloc(size_t size);
+void init(t_win *data);
 
 #endif
