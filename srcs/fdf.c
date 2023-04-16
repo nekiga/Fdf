@@ -6,7 +6,7 @@
 /*   By: garibeir < garibeir@student.42lisboa.com > +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/01 16:47:10 by garibeir          #+#    #+#             */
-/*   Updated: 2023/04/01 17:19:46 by garibeir         ###   ########.fr       */
+/*   Updated: 2023/04/16 16:46:25 by garibeir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,20 +15,17 @@
 
 int main(void)
 {
-    t_win *data;
     
-    init (data);
-    mlx_loop(data->addr);
-    
-
-    
+    init();
+	key_handler(mlx_key_hook(data()->win, &key_handler, data()));
 }
 
-void init(t_win *data)
+void init(void)
 {
-	data = xmalloc(sizeof(t_win));
-	data->addr = mlx_init();
-	data->win = mlx_new_window(data->addr, WIDTH, HEIGHT, NAME);
-   
+	data()->addr = mlx_init();
+	data()->win = mlx_new_window(data()->addr, WIDTH, HEIGHT, NAME);
+	key_handler(mlx_key_hook(data()->win, &key_handler, data()));
+	mlx_loop(data()->addr);
     
 }
+

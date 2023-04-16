@@ -6,7 +6,7 @@
 /*   By: garibeir < garibeir@student.42lisboa.com > +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/01 16:47:31 by garibeir          #+#    #+#             */
-/*   Updated: 2023/04/01 17:25:45 by garibeir         ###   ########.fr       */
+/*   Updated: 2023/04/16 16:19:48 by garibeir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,8 @@ void	pixel_put(int x, int y, int color)
 	char	*dst;
 	int		offset;
 
-	offset = y * cwin()->line_length + x * (cwin()->bits_per_pixel / 8);
-	dst = cwin()->addr + offset;
+	offset = y * data()->line_length + x * (data()->bits_per_pixel / 8);
+	dst = data()->addr + offset;
 	*(unsigned int*)dst = color;
 }
 
@@ -82,7 +82,7 @@ void	plotline(t_point *start, t_point *end)
 	plot = calculate_line(start, end);
 	while (1)
 	{
-		putpixel(x, y, start->color);
+		pixel_put(x, y, start->color);
 		if (x == end->x && y == end->y)
 			break ;
 		po2 = 2 * plot.po;

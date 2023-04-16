@@ -6,7 +6,7 @@
 /*   By: garibeir < garibeir@student.42lisboa.com > +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/01 16:47:43 by garibeir          #+#    #+#             */
-/*   Updated: 2023/04/01 17:21:50 by garibeir         ###   ########.fr       */
+/*   Updated: 2023/04/16 16:19:12 by garibeir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@
 
 typedef struct	s_win
  {
-	char	*addr;
+	void	*addr;
 	char 	*win;
     int     width;
     int     height;
@@ -79,12 +79,12 @@ float m_abs(float x );
 void swap(int* a , int*b);
 
 //Call structs
-t_win    *cwin(void);
+t_win   *data(void);
 t_img       *cimg(void);
 t_point     *cpoint(void);
 
 // Auxiliary functions
 void	*xmalloc(size_t size);
-void init(t_win *data);
+void init();
 
 #endif

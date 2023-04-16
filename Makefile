@@ -6,7 +6,7 @@
 #    By: garibeir < garibeir@student.42lisboa.com > +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/04/01 16:48:14 by garibeir          #+#    #+#              #
-#    Updated: 2023/04/01 16:48:15 by garibeir         ###   ########.fr        #
+#    Updated: 2023/04/16 15:25:05 by garibeir         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -35,7 +35,7 @@ LMLX_FLAGS = -L$(MLX_LIB_DIR) -lmlx_Linux -L/usr/lib -lXext -lX11 -lm -lz -fPIC
 DEFAULT = \033[0;92m
 
 #----- Files:
-SRC	= ./srcs/fdf.c ./srcs/draw.c ./srcs/keyhandler.c ./algorithm/drawline.c ./algorithm/mathaux.c
+SRC	= ./srcs/fdf.c ./srcs/draw.c ./srcs/keyhandler.c ./srcs/aux.c ./srcs/structcall.c
 
 
 
