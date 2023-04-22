@@ -6,7 +6,7 @@
 /*   By: garibeir < garibeir@student.42lisboa.com > +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/01 16:47:43 by garibeir          #+#    #+#             */
-/*   Updated: 2023/04/16 16:19:12 by garibeir         ###   ########.fr       */
+/*   Updated: 2023/04/22 17:12:42 by garibeir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@
 #include <stdbool.h>
 #include "keyhandler.h"
 #include "./includes/libft/libft.h"
+#include "./includes/getnextline/get_next_line.h"
 #include "./includes/printf/ft_printf.h"
 #include "./includes/minilibx-linux/mlx.h"
 #include "./includes/minilibx-linux/mlx_int.h"
@@ -29,6 +30,8 @@
 #define WIDTH 1920
 #define HEIGHT 1080
 #define NAME "***************************************"
+
+typedef unsigned long long ull;
 
 typedef struct	s_win
  {
@@ -86,5 +89,9 @@ t_point     *cpoint(void);
 // Auxiliary functions
 void	*xmalloc(size_t size);
 void init();
+void error(char *s, bool allo);
+
+//Parser functions
+char **get_map(char *file);
 
 #endif

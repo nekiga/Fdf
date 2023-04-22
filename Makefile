@@ -6,7 +6,7 @@
 #    By: garibeir < garibeir@student.42lisboa.com > +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/04/01 16:48:14 by garibeir          #+#    #+#              #
-#    Updated: 2023/04/16 15:25:05 by garibeir         ###   ########.fr        #
+#    Updated: 2023/04/22 17:21:41 by garibeir         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,7 +15,7 @@ NAME	= fdf
 
 #---- Compilation:
 CC = cc
-CFLAGS = -Imlx -g #-fsanitize=address Wall -Werror -Wextra 
+CFLAGS = -Imlx -g  -Wall -Werror -Wextra 
 MILIB  = -I /usr/X11/include -g -L /usr/X11/lib -l minilibx-linux -framework OpenGL -framework AppKit
 
 #----- Printf:
@@ -35,7 +35,8 @@ LMLX_FLAGS = -L$(MLX_LIB_DIR) -lmlx_Linux -L/usr/lib -lXext -lX11 -lm -lz -fPIC
 DEFAULT = \033[0;92m
 
 #----- Files:
-SRC	= ./srcs/fdf.c ./srcs/draw.c ./srcs/keyhandler.c ./srcs/aux.c ./srcs/structcall.c
+SRC	= ./srcs/fdf.c ./srcs/draw.c ./srcs/keyhandler.c ./srcs/aux.c ./srcs/structcall.c ./srcs/parser.c \
+	./includes/getnextline/get_next_line.c 	./includes/getnextline/get_next_line_utils.c \
 
 
 
