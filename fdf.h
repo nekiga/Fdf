@@ -6,7 +6,7 @@
 /*   By: garibeir < garibeir@student.42lisboa.com > +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/01 16:47:43 by garibeir          #+#    #+#             */
-/*   Updated: 2023/04/22 17:12:42 by garibeir         ###   ########.fr       */
+/*   Updated: 2023/04/23 19:59:02 by garibeir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,24 +33,29 @@
 
 typedef unsigned long long ull;
 
-typedef struct	s_win
+typedef struct	s_data
  {
 	void	*addr;
+	void	*mlx;
 	char 	*win;
     int     width;
     int     height;
 	int		bits_per_pixel;
 	int		line_length;
+	int		rows;
 	int		endian;
 
-}				t_win;
+}				t_data;
 
 typedef struct s_imge 
 {
     void *img;
-
+	void*addr;
+	
     
 } t_imge;
+
+
 
 typedef struct s_point
 {
@@ -71,7 +76,9 @@ typedef struct s_plot
 
 // Drawing functions
 void	pixel_put(int x, int y, int color);
-int    draw_line(int x0, int x1, int y0, int y1);
+void	plot_line(t_point *start, t_point *end);
+ void 	make_image(t_point **map);
+ 
 
 //Math functions
 float rfPartOfNumber(float x);
@@ -82,16 +89,20 @@ float m_abs(float x );
 void swap(int* a , int*b);
 
 //Call structs
-t_win   *data(void);
-t_img       *cimg(void);
+t_data   *data(void);
+t_imge 	*cimg(void);
 t_point     *cpoint(void);
 
 // Auxiliary functions
 void	*xmalloc(size_t size);
 void init();
+t_imge *img_init(void);
 void error(char *s, bool allo);
+void	cal_line_length(char **lines, int rows);
 
 //Parser functions
 char **get_map(char *file);
+t_point **convert_to_point(char **lines);
+t_point **get_point_map(char *file);
 
 #endif

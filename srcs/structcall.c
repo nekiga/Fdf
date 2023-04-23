@@ -6,23 +6,23 @@
 /*   By: garibeir < garibeir@student.42lisboa.com > +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/01 16:47:20 by garibeir          #+#    #+#             */
-/*   Updated: 2023/04/16 16:12:58 by garibeir         ###   ########.fr       */
+/*   Updated: 2023/04/23 17:42:22 by garibeir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 
  #include "../fdf.h"
 
-t_win *data(void)
+t_data *data(void)
 {
-    static t_win data;
+    static t_data data;
 
     return (&data);
 }
 
-t_img *cimg(void)
+t_imge *cimg(void)
 {
-    static t_img img;
+    static t_imge img;
 
     return (&img);
 }

@@ -6,7 +6,7 @@
 /*   By: garibeir < garibeir@student.42lisboa.com > +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/01 16:52:13 by garibeir          #+#    #+#             */
-/*   Updated: 2023/04/22 16:40:07 by garibeir         ###   ########.fr       */
+/*   Updated: 2023/04/23 15:03:30 by garibeir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ void error(char *s, bool allo)
 	{
 		
 		free(data()->addr);
-		free(data()->win);
+		free(data()->win); 
 		free(data());
 	}
 	exit(1);

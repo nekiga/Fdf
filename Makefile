@@ -6,7 +6,7 @@
 #    By: garibeir < garibeir@student.42lisboa.com > +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/04/01 16:48:14 by garibeir          #+#    #+#              #
-#    Updated: 2023/04/22 17:21:41 by garibeir         ###   ########.fr        #
+#    Updated: 2023/04/23 18:35:56 by garibeir         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,7 +15,7 @@ NAME	= fdf
 
 #---- Compilation:
 CC = cc
-CFLAGS = -Imlx -g  -Wall -Werror -Wextra 
+CFLAGS = -Imlx -g -fsanitize=address -Wall -Werror -Wextra 
 MILIB  = -I /usr/X11/include -g -L /usr/X11/lib -l minilibx-linux -framework OpenGL -framework AppKit
 
 #----- Printf:

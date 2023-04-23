@@ -6,7 +6,7 @@
 /*   By: garibeir < garibeir@student.42lisboa.com > +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/01 16:47:31 by garibeir          #+#    #+#             */
-/*   Updated: 2023/04/16 16:19:48 by garibeir         ###   ########.fr       */
+/*   Updated: 2023/04/23 17:47:04 by garibeir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	pixel_put(int x, int y, int color)
 	int		offset;
 
 	offset = y * data()->line_length + x * (data()->bits_per_pixel / 8);
-	dst = data()->addr + offset;
+	dst = cimg()->addr + offset;
 	*(unsigned int*)dst = color;
 }
 
@@ -50,7 +50,7 @@ t_plot	calculate_line(t_point *start, t_point *end)
 	return (line);
 }
 
-int	plotline2(t_plot *plot, int y, int po2)
+int	plot_line2(t_plot *plot, int y, int po2)
 {
 	if (po2 < plot->dx)
 	{
@@ -60,7 +60,7 @@ int	plotline2(t_plot *plot, int y, int po2)
 	return (y);
 }
 
-int	plotline3(t_plot *plot, int x, int po2)
+int	plot_line3(t_plot *plot, int x, int po2)
 {
 	if (po2 > plot->dy)
 	{
@@ -70,7 +70,7 @@ int	plotline3(t_plot *plot, int x, int po2)
 	return (x);
 }
 
-void	plotline(t_point *start, t_point *end)
+void	plot_line(t_point *start, t_point *end)
 {
 	t_plot	plot;
 	int		y;
@@ -86,7 +86,17 @@ void	plotline(t_point *start, t_point *end)
 		if (x == end->x && y == end->y)
 			break ;
 		po2 = 2 * plot.po;
-		y = plotline2(&plot, y, po2);
-		x = plotline3(&plot, x, po2);
+		y = plot_line2(&plot, y, po2);
+		x = plot_line3(&plot, x, po2);
 	}
+}
+
+t_imge *img_init(void)
+{
+	t_imge *img;
+	
+	img = xmalloc(sizeof(t_imge));
+	img->img = mlx_new_image(data()->mlx, WIDTH, HEIGHT);
+	img->addr = mlx_get_data_addr(img->img, &data()->bits_per_pixel, &data()->line_length, &data()->endian);
+	return (img);
 }
