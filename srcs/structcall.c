@@ -33,3 +33,10 @@ t_point *cpoint(void)
 
     return (&point);
 }
+
+t_map	*cmap(void)
+{
+	static t_map	map;
+
+	return (&map);
+}

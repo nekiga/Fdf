@@ -74,35 +74,48 @@ typedef struct s_plot
 	int		sy;
 }			t_plot;
 
+typedef struct s_map
+{
+	int		height;
+	int		width;
+	char	**array;
+	t_point	**map;
+	int		z_max;
+	int		z_min;
+	int		spacing;
+	int		elevation;
+	int		offset_x;
+	int		offset_y;
+}			t_map;
+
 // Drawing functions
 void	pixel_put(int x, int y, int color);
 void	plot_line(t_point *start, t_point *end);
- void 	make_image(t_point **map);
+void	print_grid(void);
  
 
 //Math functions
-float rfPartOfNumber(float x);
-float fPartOfNumber(float x);
-int roundNumber(float x);
-int iPartOfNumber(float x);
-float m_abs(float x );
-void swap(int* a , int*b);
+void	grid_to_iso(void);
+void	print_grid(void);
 
 //Call structs
 t_data   *data(void);
 t_imge 	*cimg(void);
 t_point     *cpoint(void);
+t_map	*cmap(void);
 
 // Auxiliary functions
 void	*xmalloc(size_t size);
 void init();
-t_imge *img_init(void);
+void	img_init(void);
 void error(char *s, bool allo);
-void	cal_line_length(char **lines, int rows);
+void	cal_line_length(char **lines);
 
 //Parser functions
 char **get_map(char *file);
-t_point **convert_to_point(char **lines);
-t_point **get_point_map(char *file);
+void convert_to_point(char **lines);
+void	get_point_map(char *file);
+int	limits(void);
+char **remove_spaces(char **lines);
 
 #endif

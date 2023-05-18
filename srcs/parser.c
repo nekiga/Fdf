@@ -24,6 +24,7 @@ char **get_map(char *file)
 	if (!(fd = open(file, 'r')))
 		error("Could not open file", false);
 	i = 0;
+	data()->line_length = 0;
 	data()->rows = 0;
 	c[0] = '1';
 	while (read(fd, &c, 1)) // counts how many rows
@@ -36,52 +37,49 @@ char **get_map(char *file)
 		error("Could not open file", false);
 	while (temp--) // reads file and saves each row 
 		lines[i++] = get_next_line(fd);
+	cal_line_length(lines);
+	
 	return (lines);
 	
 }
 // Parse that file girl!! u slay xx 
 // Turns the array of chars into an array of structs
 
-t_point **convert_to_point(char **lines)
+void convert_to_point(char **lines)
 {
-	t_point **map;
 	int		i;
 	int		j;
 	
 	i = 0;
-	j = 0;
-	
-	map = xmalloc(sizeof(t_point *) * data()->rows);
-	i = 0;
 	while (i < data()->rows)
 	{
 		j = 0;
-		map[i] = xmalloc(sizeof(t_point ) * data()->line_length);
-		while (j < data()->line_length)
+		printf("aa\n");
+		cmap()->map = xmalloc(sizeof(t_point *) * data()->rows);
+		while (j < data()->line_length )
 		{
-			map[i][j].z = ft_atoi(&lines[i][j]);
-			map[i][j].x = (int)j;
-			map[i][j].y = (int)i;
-			map[i][j].color = GREEN;
+			cmap()->map[i] = xmalloc(sizeof(t_point ) * data()->line_length);
+			cmap()->map[i][j].z = ft_atoi(lines[i]);
+			cmap()->map[i][j].x = (j * cmap()->spacing )+ WIDTH / 2 - data()->line_length;
+			cmap()->map[i][j].y = (i * cmap()->spacing )+ HEIGHT / 2 - data()->rows;
+			cmap()->map[i][j].color = GREEN;
+			printf("z %i x %i y %i\n",cmap()->map[i][j].z, cmap()->map[i][j].x ,cmap()->map[i][j].y );
 			j++;
 		}
 		i++;
 	}
-	return(map);                                                                                                                                                                                                                                                                                                                                                                                         
 }
 
-t_point **get_point_map(char *file)
+void	get_point_map(char *file)
 {
 	char **lines;
-	t_point **map;
-	lines = get_map(file);
-	cal_line_length(lines, data()->rows);
-	map = convert_to_point(lines);
-	return(map);
+	
+	lines = remove_spaces(get_map(file));
+ 	convert_to_point(lines);
 	
 }
 
-void	cal_line_length(char **lines, int rows)
+void	cal_line_length(char **lines)
 {
 	int	i;
 	int	j;
@@ -92,7 +90,7 @@ void	cal_line_length(char **lines, int rows)
 	count = 0;
 	fcount = 0;
 	
-	while(i != rows)
+	while(i != data()->rows)
 	{
 		j = 0;
 		while (lines[i][j])
@@ -108,5 +106,36 @@ void	cal_line_length(char **lines, int rows)
 		i++;
 		count = 0;
 	}
-	data()->line_length = count + 1;
+	data()->line_length = fcount;
 }
+
+char **remove_spaces(char **lines)
+{
+	char **nlines;
+	int	i;
+	int	j;
+	int	k;
+
+	i = 0;
+	nlines = xmalloc(sizeof(char *) * data()->rows);
+	while (i < data()->rows) // problem is probably here
+	{	
+		j = 0;
+		k = 0;
+		nlines[i] = xmalloc(sizeof(char ) * data()->line_length);
+		while(j < data()->line_length * 2)
+		{
+			if(lines[i][j] != ' ')
+			{
+				nlines[i][k] = lines[i][j];
+				printf(" in remove spaces %c \n", nlines[i][k]);
+				k++;
+			}
+			j++;
+		}
+		i++;
+	}
+	return (nlines);
+}
+
+// need to change to a 3d array 

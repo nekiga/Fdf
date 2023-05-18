@@ -36,7 +36,7 @@ DEFAULT = \033[0;92m
 
 #----- Files:
 SRC	= ./srcs/fdf.c ./srcs/draw.c ./srcs/keyhandler.c ./srcs/aux.c ./srcs/structcall.c ./srcs/parser.c \
-	./includes/getnextline/get_next_line.c 	./includes/getnextline/get_next_line_utils.c \
+	./srcs/iso.c ./includes/getnextline/get_next_line.c 	./includes/getnextline/get_next_line_utils.c \
 
 
 
@@ -65,13 +65,16 @@ clean:
 		@echo "$(DEFAULT)\tDone cleaning.\n"
 
 fclean:		clean
-			$(RM) $(NAME)
+			$(RM) $(NAME) $(OBJ)
 			make -s fclean -C $(FT_PRINTF_PATH)
 			make -s fclean -C $(FT_LIBFT_PATH) 
 			@clear
 			@echo "$(DEFAULT)\tDone function cleaning.\n"
 
 re: fclean all
+
+test:
+		./fdf basictest.fdf
 
 	
 		

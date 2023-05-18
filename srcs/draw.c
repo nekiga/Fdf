@@ -91,12 +91,10 @@ void	plot_line(t_point *start, t_point *end)
 	}
 }
 
-t_imge *img_init(void)
+void img_init(void)
 {
-	t_imge *img;
 	
-	img = xmalloc(sizeof(t_imge));
-	img->img = mlx_new_image(data()->mlx, WIDTH, HEIGHT);
-	img->addr = mlx_get_data_addr(img->img, &data()->bits_per_pixel, &data()->line_length, &data()->endian);
-	return (img);
+	cimg()->img = mlx_new_image(data()->mlx, WIDTH, HEIGHT);
+	cimg()->addr = mlx_get_data_addr(cimg()->img, &data()->bits_per_pixel, &data()->line_length, &data()->endian);
 }
+

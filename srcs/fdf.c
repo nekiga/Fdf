@@ -13,42 +13,29 @@
 
 #include "../fdf.h"
 
+
 int main(int ac, char **av)
 {
-	t_point **map;
-	t_imge *img;
 	
     if (ac == 1)
 		exit(1);
-	map = get_point_map(av[1]);
+	get_point_map(av[1]);
     init();
-	img	= img_init();
-	make_image(map); 
-	mlx_put_image_to_window(data()->mlx, data()->win,img->img, 0, 0);
-	key_handler(mlx_key_hook(data()->win, &key_handler, data())); 
+	img_init();
+	print_grid(); 
+	mlx_put_image_to_window(data()->mlx, data()->win,cimg()->img, 0, 0);
+	key_handler(mlx_key_hook(data()->win, &key_handler, data()));
+	mlx_loop(data()->mlx);
 }
 
 void init(void)
 {
 	data()->mlx = mlx_init();
 	data()->win = mlx_new_window(data()->mlx, WIDTH, HEIGHT, NAME);
-	key_handler(mlx_key_hook(data()->win, &key_handler, data()));
-	mlx_loop(data()->mlx);
-}
-
- void make_image(t_point **map)
-{
-	ull	j;
-	ull	i;
+	cmap()->elevation = 1;
+	cmap()->spacing = 20;
+	cmap()->offset_x = 500;
+	cmap()->offset_x = 400;
 	
-	i = 0;
-	j = 0;
-	while (map[i])
-	{
-		plot_line(&map[i][j], &map[i][j + 1]);
-		i++;
-		j++;
-	}
 }
-
 
