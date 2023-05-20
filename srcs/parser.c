@@ -6,7 +6,7 @@
 /*   By: garibeir < garibeir@student.42lisboa.com > +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/16 16:50:05 by garibeir          #+#    #+#             */
-/*   Updated: 2023/05/20 14:41:09 by garibeir         ###   ########.fr       */
+/*   Updated: 2023/05/20 17:54:15 by garibeir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,9 +22,8 @@
 	char c[1];
 	int	fd;
 	int i;
-	ull temp;
 	
-	if (!(fd = open(file, 'r')))
+	if (!(fd = open(file, O_RDONLY)))
 		error("Could not open file", false);
 	i = 0;
 	data()->line_length = 0;
@@ -33,13 +32,15 @@
 	while (read(fd, &c, 1)) // counts how many rows
 		if (c[0] == '\n')
 			data()->rows++;
-	temp = data()->rows;
 	lines = xmalloc(sizeof(char *) * data()->rows); // allocates amount of rows
 	close(fd);
-	if (!(fd = open(file, 'r')))
+	if (!(fd = open(file, O_RDONLY)))
 		error("Could not open file", false);
-	while (temp--) // reads file and saves each row 
-		lines[i++] = get_next_line(fd);
+	while (i  < data()->rows)
+	{
+		lines[i] = get_next_line(fd); // reads file and saves each row 
+		i++;	
+	}
 	cal_line_length(lines);
 	
 	return (lines);
@@ -55,7 +56,7 @@ void convert_to_point(char **lines)
 	char **buff;
 	
 	i = 0;
-	buff = xmalloc(sizeof(char) * data()->line_length);
+	buff = xmalloc(sizeof(char) * data()->line_length + 1);
 	cmap()->map = xmalloc(sizeof(t_point *) * data()->rows);
 	while (i < data()->rows)
 	{
@@ -64,11 +65,11 @@ void convert_to_point(char **lines)
 		while (j < data()->line_length )
 		{
 			cmap()->map[i] = xmalloc(sizeof(t_point ) * data()->line_length);
-			cmap()->map[i][j].z = ft_atoi(buff[i]);
-			cmap()->map[i][j].x = i;// * cmap()->spacing )+ WIDTH / 2 - data()->line_length;
-			cmap()->map[i][j].y = j;// * cmap()->spacing )+ HEIGHT / 2 - data()->rows;
+			cmap()->map[i][j].z = ft_atoi(buff[j]);
+			cmap()->map[i][j].x = i * cmap()->spacing + WIDTH / 2 - data()->line_length;
+			cmap()->map[i][j].y = j * cmap()->spacing + HEIGHT / 2 - data()->rows;
 			cmap()->map[i][j].color = GREEN;
-			printf("z %i x %i y %i\n",cmap()->map[i][j].z, cmap()->map[i][j].x ,cmap()->map[i][j].y );
+			//printf("z %i x %i y %i\n",cmap()->map[i][j].z, cmap()->map[i][j].x ,cmap()->map[i][j].y );
 			j++;
 		}
 		
@@ -81,6 +82,7 @@ void	get_point_map(char *file)
 	char **lines;
 	
 	lines = remove_spaces(get_map(file));
+	
  	convert_to_point(lines);
 	
 }
@@ -121,25 +123,24 @@ char **remove_spaces(char **lines)
 	int	i;
 	int	j;
 	int	k;
-
 	i = 0;
-	nlines = xmalloc(sizeof(char *) * data()->rows + 1);
+	nlines = xmalloc(sizeof(char *) * data()->rows);
 	while (i < data()->rows) // problem is probably here
 	{	
 		j = 0;
 		k = 0;
-		nlines[i] = xmalloc(sizeof(char ) * data()->line_length);
-		while(j < data()->line_length * 2 )
+		nlines[i] = xmalloc(sizeof(char ) * data()->line_length + 1);
+		while(j < data()->line_length * 2)
 		{
 			if(lines[i][j] != ' ')
 			{
 				nlines[i][k] = lines[i][j];
-				printf("[%c]", nlines[i][k]); // not saVING THE LAST ONE
-				k++;
+
+				printf("\t\t%c\n",nlines[i][k]);
 			}
 			j++; 
 		}
-			printf("\n");
+		printf("\n old: %s\n ", lines[i]);
 		i++;
 	}
 	return (nlines);
