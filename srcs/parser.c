@@ -6,19 +6,22 @@
 /*   By: garibeir < garibeir@student.42lisboa.com > +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/16 16:50:05 by garibeir          #+#    #+#             */
-/*   Updated: 2023/04/23 20:08:27 by garibeir         ###   ########.fr       */
+/*   Updated: 2023/05/20 14:41:09 by garibeir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../fdf.h"
 
 // opens map and makes the lines
-char **get_map(char *file)
+
+
+
+ char **get_map(char *file)
 {
 	char **lines;
 	char c[1];
 	int	fd;
-	ull i;
+	int i;
 	ull temp;
 	
 	if (!(fd = open(file, 'r')))
@@ -40,7 +43,7 @@ char **get_map(char *file)
 	cal_line_length(lines);
 	
 	return (lines);
-	
+	 
 }
 // Parse that file girl!! u slay xx 
 // Turns the array of chars into an array of structs
@@ -49,23 +52,26 @@ void convert_to_point(char **lines)
 {
 	int		i;
 	int		j;
+	char **buff;
 	
 	i = 0;
+	buff = xmalloc(sizeof(char) * data()->line_length);
+	cmap()->map = xmalloc(sizeof(t_point *) * data()->rows);
 	while (i < data()->rows)
 	{
 		j = 0;
-		printf("aa\n");
-		cmap()->map = xmalloc(sizeof(t_point *) * data()->rows);
+		buff = ft_split(lines[i],' ');
 		while (j < data()->line_length )
 		{
 			cmap()->map[i] = xmalloc(sizeof(t_point ) * data()->line_length);
-			cmap()->map[i][j].z = ft_atoi(lines[i]);
-			cmap()->map[i][j].x = (j * cmap()->spacing )+ WIDTH / 2 - data()->line_length;
-			cmap()->map[i][j].y = (i * cmap()->spacing )+ HEIGHT / 2 - data()->rows;
+			cmap()->map[i][j].z = ft_atoi(buff[i]);
+			cmap()->map[i][j].x = i;// * cmap()->spacing )+ WIDTH / 2 - data()->line_length;
+			cmap()->map[i][j].y = j;// * cmap()->spacing )+ HEIGHT / 2 - data()->rows;
 			cmap()->map[i][j].color = GREEN;
 			printf("z %i x %i y %i\n",cmap()->map[i][j].z, cmap()->map[i][j].x ,cmap()->map[i][j].y );
 			j++;
 		}
+		
 		i++;
 	}
 }
@@ -117,22 +123,23 @@ char **remove_spaces(char **lines)
 	int	k;
 
 	i = 0;
-	nlines = xmalloc(sizeof(char *) * data()->rows);
+	nlines = xmalloc(sizeof(char *) * data()->rows + 1);
 	while (i < data()->rows) // problem is probably here
 	{	
 		j = 0;
 		k = 0;
 		nlines[i] = xmalloc(sizeof(char ) * data()->line_length);
-		while(j < data()->line_length * 2)
+		while(j < data()->line_length * 2 )
 		{
 			if(lines[i][j] != ' ')
 			{
 				nlines[i][k] = lines[i][j];
-				printf(" in remove spaces %c \n", nlines[i][k]);
+				printf("[%c]", nlines[i][k]); // not saVING THE LAST ONE
 				k++;
 			}
-			j++;
+			j++; 
 		}
+			printf("\n");
 		i++;
 	}
 	return (nlines);
