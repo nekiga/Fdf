@@ -49,12 +49,13 @@ void convert_to_point(char **lines)
 {
 	int		i;
 	int		j;
-	
+	char *buff;
+
 	i = 0;
+	buff = xmalloc(sizeof(int) * data()->line_lenght * data()->rows)
 	while (i < data()->rows)
 	{
 		j = 0;
-		printf("aa\n");
 		cmap()->map = xmalloc(sizeof(t_point *) * data()->rows);
 		while (j < data()->line_length )
 		{
@@ -122,17 +123,17 @@ char **remove_spaces(char **lines)
 	{	
 		j = 0;
 		k = 0;
-		nlines[i] = xmalloc(sizeof(char ) * data()->line_length);
-		while(j < data()->line_length * 2)
+		nlines[i] = xmalloc(sizeof(char ) * data()->line_length + 1);
+		while(j < data()->line_length * 2 + 1)
 		{
 			if(lines[i][j] != ' ')
 			{
-				nlines[i][k] = lines[i][j];
-				printf(" in remove spaces %c \n", nlines[i][k]);
+				printf("%c",nlines[i][k] = lines[i][j]);
 				k++;
 			}
 			j++;
 		}
+		printf("\n");
 		i++;
 	}
 	return (nlines);
