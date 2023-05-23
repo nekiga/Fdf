@@ -30,17 +30,18 @@ void	print_grid(void)
 	int	y;
 
 	y = -1;
-	while (++y < data()->rows - 1)
+	while (++y < data()->rows - 2)
 	{
 		x = -1;
-		while (++x < data()->line_length - 1)
+		while (++x < data()->line_length - 2)
 		{
 			plot_line(&cmap()->map[y][x], &cmap()->map[y][x + 1]);
-			plot_line(&cmap()->map[y][x], &cmap()->map[y + 1][x]);
+			printf("x %i y %i\n", cmap()->map[y][x].x, cmap()->map[y][x].y);
+			 plot_line(&cmap()->map[y][x], &cmap()->map[y + 1][x]);
 			plot_line(&cmap()->map[data()->rows - 1][x],
 				&cmap()->map[data()->rows - 1][x + 1]);
-			plot_line(&cmap()->map[y][cmap()->width - 1], &cmap()->map[y
-				+ 1][data()->rows - 1]);
+			plot_line(&cmap()->map[y][data()->line_length - 1], &cmap()->map[y
+				+ 1][data()->rows - 1]); 
 		}
 	}
 }
