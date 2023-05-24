@@ -1,0 +1,7 @@
+{
+	"files.associations": {
+		"fdf.h": "c",
+		"limits": "c",
+		"new": "c"
+	}
+}

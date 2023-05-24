@@ -6,7 +6,7 @@
 /*   By: garibeir < garibeir@student.42lisboa.com > +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/16 16:50:05 by garibeir          #+#    #+#             */
-/*   Updated: 2023/05/23 18:15:08 by garibeir         ###   ########.fr       */
+/*   Updated: 2023/05/24 14:16:17 by garibeir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,27 +51,30 @@
 
 void convert_to_point(char **lines)
 {
-    int i;
-    int j;
-    char **buff;
-    
-    i = 0;
-    cmap()->map = xmalloc(sizeof(t_point *) * data()->rows);
-    while (i < data()->rows)
-    {
-        j = 0;
-        buff = ft_split(lines[i], ' ');
-        while (buff[j]) 
-        {
-            cmap()->map[i] = xmalloc(sizeof(t_point) * data()->line_length);
-            cmap()->map[i][j].z = ft_atoi(buff[j]);
-            cmap()->map[i][j].x = i * cmap()->spacing + WIDTH / 2 - data()->line_length;
-            cmap()->map[i][j].y = j * cmap()->spacing + HEIGHT / 2 - data()->rows;
-            cmap()->map[i][j].color = GREEN;
-            j++;
-        }
-        i++;
-    }
+	int		i;
+	int		j;
+	char **buff;
+	
+	i = 0;
+	buff = xmalloc(sizeof(char) * data()->line_length + 1);
+	cmap()->map = xmalloc(sizeof(t_point *) * data()->rows);
+	while (i < data()->rows)
+	{
+		j = 0;
+		buff = ft_split(lines[i],' ');
+		while (j < data()->line_length )
+		{
+			cmap()->map[i] = xmalloc(sizeof(t_point ) * data()->line_length);
+			cmap()->map[i][j].z = ft_atoi(buff[j]);
+			cmap()->map[i][j].x = i * cmap()->spacing + WIDTH / 2 - data()->line_length;
+			cmap()->map[i][j].y = j * cmap()->spacing + HEIGHT / 2 - data()->rows;
+			cmap()->map[i][j].color = GREEN;
+			//printf("z %i x %i y %i\n",cmap()->map[i][j].z, cmap()->map[i][j].x ,cmap()->map[i][j].y );
+			j++;
+		}
+		
+		i++;
+	}
 }
 
 void	get_point_map(char *file)
@@ -114,6 +117,33 @@ void	cal_line_length(char **lines)
 	data()->line_length = fcount + 1;
 }
 
+char **remove_spaces(char **lines)
+{
+	char **nlines;
+	int	i;
+	int	j;
+	int	k;
+	i = 0;
+	nlines = xmalloc(sizeof(char *) * data()->rows);
+	while (i < data()->rows) // problem is probably here
+	{	
+		j = 0;
+		k = 0;
+		nlines[i] = xmalloc(sizeof(char ) * data()->line_length + 1);
+		while(j < data()->line_length * 2)
+		{
+			if(lines[i][j] != ' ')
+			{
+				nlines[i][k] = lines[i][j];
 
+				printf("\t\t%c\n",nlines[i][k]);
+			}
+			j++; 
+		}
+		printf("\n old: %s\n ", lines[i]);
+		i++;
+	}
+	return (nlines);
+}
 
 // need to change to a 3d array 
