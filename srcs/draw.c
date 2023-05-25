@@ -6,7 +6,7 @@
 /*   By: garibeir < garibeir@student.42lisboa.com > +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/01 16:47:31 by garibeir          #+#    #+#             */
-/*   Updated: 2023/04/23 17:47:04 by garibeir         ###   ########.fr       */
+/*   Updated: 2023/05/25 16:24:22 by garibeir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,22 +15,25 @@
 void	pixel_put(int x, int y, int color)
 {
 	char	*dst;
-	int		offset;
 
-	offset = y * data()->line_length + x * (data()->bits_per_pixel / 8);
-	dst = cimg()->addr + offset;
-	*(unsigned int*)dst = color;
+
+	if(0 <= x && x <= WIDTH && 0 <= y && y <= HEIGHT)
+	{
+		dst = cimg()->addr + y * cimg()->line_len + x * (data()->bits_per_pixel / 8);
+		*(unsigned int*)dst = color;
+	}
 }
 
 t_plot	calculate_line(t_point *start, t_point *end)
 {
 	t_plot	line;
-
+	
 	if (end->x >= start->x)
 	{
 		line.dx = end->x - start->x;
 		line.sx = 1;
 	}
+	
 	else
 	{
 		line.dx = start->x - end->x;
@@ -95,6 +98,9 @@ void img_init(void)
 {
 	
 	cimg()->img = mlx_new_image(data()->mlx, WIDTH, HEIGHT);
-	cimg()->addr = mlx_get_data_addr(cimg()->img, &data()->bits_per_pixel, &data()->line_length, &data()->endian);
+	cimg()->addr = mlx_get_data_addr(cimg()->img, &data()->bits_per_pixel, &cimg()->line_len, &data()->endian);
 }
 
+void	render(void)
+{
+}

@@ -6,7 +6,7 @@
 /*   By: garibeir < garibeir@student.42lisboa.com > +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/01 16:47:43 by garibeir          #+#    #+#             */
-/*   Updated: 2023/05/20 11:39:26 by garibeir         ###   ########.fr       */
+/*   Updated: 2023/05/25 16:20:41 by garibeir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,8 @@
 
 #define WIDTH 1920
 #define HEIGHT 1080
-#define NAME "***************************************"
+#define NAME "miguek is gat"
+
 
 typedef unsigned long long ull;
 
@@ -51,6 +52,7 @@ typedef struct s_imge
 {
     void *img;
 	void*addr;
+	int line_len;
 	
     
 } t_imge;
@@ -76,9 +78,6 @@ typedef struct s_plot
 
 typedef struct s_map
 {
-	int		height;
-	int		width;
-	char	**array;
 	t_point	**map;
 	int		z_max;
 	int		z_min;
@@ -92,11 +91,11 @@ typedef struct s_map
 void	pixel_put(int x, int y, int color);
 void	plot_line(t_point *start, t_point *end);
 void	print_grid(void);
- 
-
-//Math functions
+void	render(void);
 void	grid_to_iso(void);
 void	print_grid(void);
+//Math functions
+
 
 //Call structs
 t_data   *data(void);
@@ -110,6 +109,7 @@ void init();
 void	img_init(void);
 void error(char *s, bool allo);
 void	cal_line_length(char **lines);
+void print_map(void);
 
 //Parser functions
 char **get_map(char *file);

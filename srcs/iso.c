@@ -20,30 +20,35 @@ void	grid_to_iso(void)
 			- cmap()->map[y][x].z * cmap()->elevation;
 		}
 	}
-	limits();
+	//limits();
 }
 
 
 void	print_grid(void)
 {
-	int	x;
-	int	y;
+	 int	x = -1;
+	 int	y;
 
 	y = -1;
-	while (++y < data()->rows - 2)
+	while (++y < data()->rows - 1)
 	{
 		x = -1;
-		while (++x < data()->line_length - 2)
+		while (++x < data()->line_length - 1)
 		{
 			plot_line(&cmap()->map[y][x], &cmap()->map[y][x + 1]);
-			printf("x %i y %i\n", cmap()->map[y][x].x, cmap()->map[y][x].y);
-			 plot_line(&cmap()->map[y][x], &cmap()->map[y + 1][x]);
-			plot_line(&cmap()->map[data()->rows - 1][x],
-				&cmap()->map[data()->rows - 1][x + 1]);
-			plot_line(&cmap()->map[y][data()->line_length - 1], &cmap()->map[y
-				+ 1][data()->rows - 1]); 
+		 	 plot_line(&cmap()->map[y][x], &cmap()->map[y + 1][x]);
+			if (y == 0)
+				plot_line(&cmap()->map[data()->rows - 1][x],
+					&cmap()->map[data()->rows - 1][x + 1]);
 		}
-	}
+			plot_line(&cmap()->map[y][data()->line_length - 1], &cmap()->map[y
+				+ 1][data()->line_length - 1]);  
+	}  
+	/* while (x < data()->line_length - 1)
+	{
+		plot_line(&cmap()->map[0][x], &cmap()->map[0][x + 1]);
+		x++;
+	} */
 }
 
 int	limits2(int y, int x)
@@ -57,7 +62,7 @@ int	limits2(int y, int x)
 
 int	limits(void)
 {
-	if (!(limits2(0, 0) && limits2(0, cmap()->width - 1)))
+	if (!(limits2(0, 0) && limits2(0, data()->line_length - 1)))
 		return (0);
 	if (!(limits2(data()->rows - 1, 0) && limits2(data()->rows - 1,
 				data()->line_length - 1)))
