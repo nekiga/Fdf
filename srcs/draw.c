@@ -101,6 +101,9 @@ void img_init(void)
 	cimg()->addr = mlx_get_data_addr(cimg()->img, &data()->bits_per_pixel, &cimg()->line_len, &data()->endian);
 }
 
-void	render(void)
+void	renderer(char *file)
 {
+	
+		get_point_map(file);
+		print_grid();
 }

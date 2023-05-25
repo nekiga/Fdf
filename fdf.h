@@ -91,7 +91,7 @@ typedef struct s_map
 void	pixel_put(int x, int y, int color);
 void	plot_line(t_point *start, t_point *end);
 void	print_grid(void);
-void	render(void);
+void	renderer(char *file);
 void	grid_to_iso(void);
 void	print_grid(void);
 //Math functions

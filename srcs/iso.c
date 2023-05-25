@@ -44,11 +44,7 @@ void	print_grid(void)
 			plot_line(&cmap()->map[y][data()->line_length - 1], &cmap()->map[y
 				+ 1][data()->line_length - 1]);  
 	}  
-	/* while (x < data()->line_length - 1)
-	{
-		plot_line(&cmap()->map[0][x], &cmap()->map[0][x + 1]);
-		x++;
-	} */
+
 }
 
 int	limits2(int y, int x)

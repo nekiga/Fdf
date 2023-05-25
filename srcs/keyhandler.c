@@ -15,7 +15,18 @@
 
 int key_handler(int key)
 {
+    // i need to reconstruct the map if i want the changes to be happening in real time
     if (key == ESC_KEY)
         exit(0);
+    if (key == UP)
+        cmap()->elevation++;
+    if (key == RIGHT)
+        cmap()->spacing++;
+    if (key == DOWN)
+        cmap()->elevation--;
+    if (key == DOWN)
+        cmap()->elevation--;
+    
+    
     return (0);
 }

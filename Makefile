@@ -15,7 +15,7 @@ NAME	= fdf
 
 #---- Compilation:
 CC = cc
-CFLAGS = -Imlx -g -Wall -Werror -Wextra #-fsanitize=address
+CFLAGS = -Imlx -g -Wall -Werror -Wextra -fsanitize=address
 MILIB  = -I /usr/X11/include -g -L /usr/X11/lib -l minilibx-linux -framework OpenGL -framework AppKit
 
 #----- Printf:
