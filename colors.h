@@ -6,7 +6,7 @@
 /*   By: garibeir < garibeir@student.42lisboa.com > +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/01 16:47:48 by garibeir          #+#    #+#             */
-/*   Updated: 2023/04/01 16:47:49 by garibeir         ###   ########.fr       */
+/*   Updated: 2023/05/26 14:47:34 by garibeir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@
 #define AQUA 	0x00FFFF 	
 #define TEAL 	0x008080 	
 #define BLUE	0x0000FF 	
-#define NAVY 	0x000080 	
+#define NAVY 	0x000080
+#define SLAY	0xFFC0CB 
 
 #endif

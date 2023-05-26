@@ -6,7 +6,7 @@
 /*   By: garibeir < garibeir@student.42lisboa.com > +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/16 16:50:05 by garibeir          #+#    #+#             */
-/*   Updated: 2023/05/25 16:21:04 by garibeir         ###   ########.fr       */
+/*   Updated: 2023/05/26 16:26:39 by garibeir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,7 @@ void convert_to_point(char **lines)
 		i++;
 	}
 //	printf("i: %i\n", i);
+limit();
 }
 
 void	get_point_map(char *file)

@@ -6,7 +6,7 @@
 /*   By: garibeir < garibeir@student.42lisboa.com > +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/01 16:47:31 by garibeir          #+#    #+#             */
-/*   Updated: 2023/05/25 16:24:22 by garibeir         ###   ########.fr       */
+/*   Updated: 2023/05/26 16:13:57 by garibeir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,7 @@ void	plot_line(t_point *start, t_point *end)
 	while (1)
 	{
 		pixel_put(x, y, start->color);
-		if (x == end->x && y == end->y)
+			if (x == end->x && y == end->y)
 			break ;
 		po2 = 2 * plot.po;
 		y = plot_line2(&plot, y, po2);
@@ -101,9 +101,13 @@ void img_init(void)
 	cimg()->addr = mlx_get_data_addr(cimg()->img, &data()->bits_per_pixel, &cimg()->line_len, &data()->endian);
 }
 
-void	renderer(char *file)
+void	renderer()
 {
-	
-		get_point_map(file);
+		if (cmap()->map)
+			mlx_destroy_image(data()->mlx, cimg()->img);
+		get_point_map(data()->file);
+		img_init();
 		print_grid();
+		mlx_put_image_to_window(data()->mlx, data()->win, cimg()->img, 0, 0);
+		menu();
 }

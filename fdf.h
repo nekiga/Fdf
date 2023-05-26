@@ -6,7 +6,7 @@
 /*   By: garibeir < garibeir@student.42lisboa.com > +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/01 16:47:43 by garibeir          #+#    #+#             */
-/*   Updated: 2023/05/25 16:20:41 by garibeir         ###   ########.fr       */
+/*   Updated: 2023/05/26 15:50:02 by garibeir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@
 
 #define WIDTH 1920
 #define HEIGHT 1080
-#define NAME "miguek is gat"
+#define NAME "Fil-de-fer"
 
 
 typedef unsigned long long ull;
@@ -45,6 +45,7 @@ typedef struct	s_data
 	int		line_length;
 	int		rows;
 	int		endian;
+	char	*file;
 
 }				t_data;
 
@@ -91,9 +92,10 @@ typedef struct s_map
 void	pixel_put(int x, int y, int color);
 void	plot_line(t_point *start, t_point *end);
 void	print_grid(void);
-void	renderer(char *file);
+void	renderer();
 void	grid_to_iso(void);
 void	print_grid(void);
+void	limit(void);
 //Math functions
 
 
@@ -117,5 +119,5 @@ void convert_to_point(char **lines);
 void	get_point_map(char *file);
 int	limits(void);
 char **remove_spaces(char **lines);
-
+void menu(void);
 #endif

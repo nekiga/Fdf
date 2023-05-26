@@ -20,7 +20,6 @@ void	grid_to_iso(void)
 			- cmap()->map[y][x].z * cmap()->elevation;
 		}
 	}
-	//limits();
 }
 
 
@@ -64,4 +63,23 @@ int	limits(void)
 				data()->line_length - 1)))
 		return (0);
 	return (1);
+}
+
+void	limit(void)
+{
+	if (!limits())
+	{
+		if (cmap()->spacing > 5)
+		{
+			cmap()->spacing -= 5;
+			get_point_map(data()->file);
+		}
+		else
+		{
+			cmap()->elevation = 1;
+			cmap()->spacing = 20;
+			cmap()->offset_x = 500;
+			cmap()->offset_y = 400;
+		}
+	}
 }
