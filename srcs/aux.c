@@ -84,3 +84,9 @@ void print_map(void)
 	}
 }
 
+void destructor(void)
+{
+	// do frees
+	exit(0);
+}
+

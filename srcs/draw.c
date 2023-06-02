@@ -104,7 +104,11 @@ void img_init(void)
 void	renderer()
 {
 		if (cmap()->map)
+		{
 			mlx_destroy_image(data()->mlx, cimg()->img);
+			mlx_clear_window(data()->mlx, data()->win);
+		}
+			// this implementation is probably wrong, use bzero to clear the image? 
 		get_point_map(data()->file);
 		img_init();
 		print_grid();

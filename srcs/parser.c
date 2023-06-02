@@ -13,14 +13,13 @@
 #include "../fdf.h"
 
 // opens map and makes the lines
-
+// need to adapt the code so it can also save the color value of each map 
  char **get_map(char *file)
 {
 	char **lines;
 	char c[1];
 	int	fd;
 	int i;
-	
 	if (!(fd = open(file, O_RDONLY)))
 		error("Could not open file", false);
 	i = 0;
@@ -59,14 +58,13 @@ void convert_to_point(char **lines)
 	{
 		j = 0;
 		buff = ft_split(lines[i],' ');
-		//printf("%s\n", buff[i]);
-		cmap()->map[i] = xmalloc(sizeof(t_point ) * data()->line_length );
-		while (buff[j])
+		cmap()->map[i] = xmalloc(sizeof(t_point ) * data()->line_length + 1);
+		while (buff[j] && j < data()->line_length)
 		{
 			cmap()->map[i][j].z = ft_atoi(buff[j]);
 			cmap()->map[i][j].x = j * cmap()->spacing + WIDTH / 2 - data()->line_length;
 			cmap()->map[i][j].y = i * cmap()->spacing + HEIGHT / 2 - data()->rows;
-			cmap()->map[i][j].color = WHITE;
+			get_color(i, j);
 			//printf("[%i]",cmap()->map[i][j].z);
 			j++;
 		}
@@ -76,13 +74,27 @@ void convert_to_point(char **lines)
 //	printf("i: %i\n", i);
 limit();
 }
+ void	get_color(int i, int j)
+{
 
+	if (cmap()->map[i][j].z <= -5)
+		cmap()->map[i][j].color = WHITE;
+	else if (cmap()->map[i][j].z <= 0)
+		cmap()->map[i][j].color = YELLOW;
+	else if (cmap()->map[i][j].z <= 5)
+		cmap()->map[i][j].color = SILVER;
+	else if (cmap()->map[i][j].z <= 10)
+		cmap()->map[i][j].color = RED;
+	else 
+		cmap()->map[i][j].color = BLACK;
+}
 void	get_point_map(char *file)
 {
-	char **lines;
+	static char **lines;
 	
-	lines = get_map(file);
-	
+	//if (!cmap()->map)
+		lines = get_map(file);
+	// no need to always the get map only once
  	convert_to_point(lines);
 	grid_to_iso();
 	
@@ -95,7 +107,7 @@ void	cal_line_length(char **lines)
 	int count;
 	int	fcount;
 	bool space;
-	
+	// need to change cus extra variables no longer checking if count is same ? 
 	i = 0;
 	count = 0;
 	fcount = 0;
@@ -115,12 +127,10 @@ void	cal_line_length(char **lines)
 		}
 		if (i == 0)
 			fcount = count;			
-		/*if (count != fcount && i != 0)
-			error("Invalid map", true);?*/
 		i++;
 		count = 0;
 	}
-	printf("fcount %i\n", fcount);
+	//printf("linelen %i\n", fcount);
 	data()->line_length = fcount + 1;
 }
 

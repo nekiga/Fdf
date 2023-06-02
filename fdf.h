@@ -112,6 +112,8 @@ void	img_init(void);
 void error(char *s, bool allo);
 void	cal_line_length(char **lines);
 void print_map(void);
+void destructor(void);
+void	get_color(int i, int j);
 
 //Parser functions
 char **get_map(char *file);

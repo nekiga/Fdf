@@ -25,7 +25,7 @@ int main(int ac, char **av)
 	renderer();
 	
 	mlx_key_hook(data()->win, &key_handler, data());
-	//mlx_hook(data()->win, 17, 1L << 2, FUNKAO, 0);
+	mlx_hook(data()->win, 17, 1L << 2, (void *)destructor, 0);
 	mlx_loop(data()->mlx);
 }
 
@@ -49,3 +49,9 @@ void menu(void)
 	//mlx_string_put(data()->mlx, data()->win, 100, 100, SLAY, "UP ARROW: Increase elevation\nDOWN ARROW: Decrease elevation");
 	//mlx_string_put(data()->mlx, data()->win, 100, 100, SLAY, "UP ARROW: Increase elevation\nDOWN ARROW: Decrease elevation");
 }
+
+/*void quit(void)
+{
+	if
+	free()
+}*/
