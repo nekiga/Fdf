@@ -6,7 +6,7 @@
 /*   By: garibeir < garibeir@student.42lisboa.com > +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/16 16:50:05 by garibeir          #+#    #+#             */
-/*   Updated: 2023/05/26 16:26:39 by garibeir         ###   ########.fr       */
+/*   Updated: 2023/06/02 19:06:05 by garibeir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,18 +65,14 @@ void convert_to_point(char **lines)
 			cmap()->map[i][j].x = j * cmap()->spacing + WIDTH / 2 - data()->line_length;
 			cmap()->map[i][j].y = i * cmap()->spacing + HEIGHT / 2 - data()->rows;
 			get_color(i, j);
-			//printf("[%i]",cmap()->map[i][j].z);
 			j++;
 		}
-		//printf("\n");
 		i++;
 	}
-//	printf("i: %i\n", i);
-limit();
 }
  void	get_color(int i, int j)
 {
-
+	
 	if (cmap()->map[i][j].z <= -5)
 		cmap()->map[i][j].color = WHITE;
 	else if (cmap()->map[i][j].z <= 0)
@@ -92,9 +88,8 @@ void	get_point_map(char *file)
 {
 	static char **lines;
 	
-	//if (!cmap()->map)
+	if (!cmap()->map)
 		lines = get_map(file);
-	// no need to always the get map only once
  	convert_to_point(lines);
 	grid_to_iso();
 	

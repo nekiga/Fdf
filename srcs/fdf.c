@@ -6,14 +6,17 @@
 /*   By: garibeir < garibeir@student.42lisboa.com > +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/01 16:47:10 by garibeir          #+#    #+#             */
-/*   Updated: 2023/05/26 16:25:57 by garibeir         ###   ########.fr       */
+/*   Updated: 2023/06/02 19:22:55 by garibeir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 
 #include "../fdf.h"
 
-
+//read colors
+// make destructor actually do things other then just exit
+// make proteciton for valid map
+//slay xx
 int main(int ac, char **av)
 {
 	
@@ -46,8 +49,7 @@ void menu(void)
 	mlx_string_put(data()->mlx, data()->win, 100, 100, SLAY, "Commands:");
 	mlx_string_put(data()->mlx, data()->win, 100, 120, SLAY, "UP   ARROW:    Increase elevation");
 	mlx_string_put(data()->mlx, data()->win, 100, 140, SLAY, "DOWN ARROW:    Decrease elevation");
-	//mlx_string_put(data()->mlx, data()->win, 100, 100, SLAY, "UP ARROW: Increase elevation\nDOWN ARROW: Decrease elevation");
-	//mlx_string_put(data()->mlx, data()->win, 100, 100, SLAY, "UP ARROW: Increase elevation\nDOWN ARROW: Decrease elevation");
+	mlx_string_put(data()->mlx, data()->win, 100, 160, SLAY, "A ");
 }
 
 /*void quit(void)

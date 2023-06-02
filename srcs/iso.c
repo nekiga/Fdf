@@ -21,6 +21,7 @@ void	grid_to_iso(void)
 			//cmap()->map[y][x].color = get_color(y, x);
 		}
 	}
+	limit();
 }
 
 
@@ -36,7 +37,7 @@ void	print_grid(void)
 		while (++x < data()->line_length - 1)
 		{
 			plot_line(&cmap()->map[y][x], &cmap()->map[y][x + 1]);
-		 	 plot_line(&cmap()->map[y][x], &cmap()->map[y + 1][x]);
+		 	plot_line(&cmap()->map[y][x], &cmap()->map[y + 1][x]);
 			if (y == 0)
 				plot_line(&cmap()->map[data()->rows - 1][x],
 					&cmap()->map[data()->rows - 1][x + 1]);

@@ -6,7 +6,7 @@
 /*   By: garibeir < garibeir@student.42lisboa.com > +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/01 16:52:13 by garibeir          #+#    #+#             */
-/*   Updated: 2023/05/25 16:17:48 by garibeir         ###   ########.fr       */
+/*   Updated: 2023/06/02 18:57:12 by garibeir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,3 +90,7 @@ void destructor(void)
 	exit(0);
 }
 
+void print_values(void)
+{
+	
+}
