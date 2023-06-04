@@ -6,7 +6,7 @@
 /*   By: garibeir < garibeir@student.42lisboa.com > +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/01 16:47:34 by garibeir          #+#    #+#             */
-/*   Updated: 2023/04/01 16:47:35 by garibeir         ###   ########.fr       */
+/*   Updated: 2023/06/04 12:59:43 by garibeir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define KEY_HANDLER_H
 
 # define ESC_KEY	65307
+# define KEY_SPACE 32
 # define EVENT_CLOSE_BTN 17
 # define MOUSE_BTN 1
 # define MOUSE_BTN2 3

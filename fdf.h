@@ -6,7 +6,7 @@
 /*   By: garibeir < garibeir@student.42lisboa.com > +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/01 16:47:43 by garibeir          #+#    #+#             */
-/*   Updated: 2023/05/26 15:50:02 by garibeir         ###   ########.fr       */
+/*   Updated: 2023/06/04 15:22:55 by garibeir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,6 +80,7 @@ typedef struct s_plot
 typedef struct s_map
 {
 	t_point	**map;
+	t_point **original_map;
 	int		z_max;
 	int		z_min;
 	int		spacing;
@@ -91,10 +92,11 @@ typedef struct s_map
 // Drawing functions
 void	pixel_put(int x, int y, int color);
 void	plot_line(t_point *start, t_point *end);
-void	print_grid(void);
-void	renderer();
+void	print_original_map(void);
+void	renderer(void);
+void	renderer_original(void);
 void	grid_to_iso(void);
-void	print_grid(void);
+void	print_map(void);
 void	limit(void);
 //Math functions
 
@@ -113,13 +115,13 @@ void error(char *s, bool allo);
 void	cal_line_length(char **lines);
 void print_map(void);
 void destructor(void);
-void	get_color(int i, int j);
-
+void	get_color(int i, int j, char *buff);
+void	free_char_arr(char **arr);
 //Parser functions
 char **get_map(char *file);
 void convert_to_point(char **lines);
 void	get_point_map(char *file);
 int	limits(void);
-char **remove_spaces(char **lines);
 void menu(void);
+void copy_map(void);
 #endif

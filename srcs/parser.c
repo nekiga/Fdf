@@ -6,7 +6,7 @@
 /*   By: garibeir < garibeir@student.42lisboa.com > +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/16 16:50:05 by garibeir          #+#    #+#             */
-/*   Updated: 2023/06/02 19:06:05 by garibeir         ###   ########.fr       */
+/*   Updated: 2023/06/04 17:55:42 by garibeir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,16 +26,16 @@
 	data()->line_length = 0;
 	data()->rows = 0;
 	c[0] = '1';
-	while (read(fd, &c, 1)) // counts how many rows
+	while (read(fd, &c, 1))
 		if (c[0] == '\n')
 			data()->rows++;
-	lines = xmalloc(sizeof(char *) * data()->rows); // allocates amount of rows
+	lines = xmalloc(sizeof(char *) * data()->rows);
 	close(fd);
 	if (!(fd = open(file, O_RDONLY)))
 		error("Could not open file", false);
 	while (i  < data()->rows)
 	{
-		lines[i] = get_next_line(fd); // reads file and saves each row 
+		lines[i] = get_next_line(fd);
 		i++;	
 	}
 	cal_line_length(lines);
@@ -64,35 +64,64 @@ void convert_to_point(char **lines)
 			cmap()->map[i][j].z = ft_atoi(buff[j]);
 			cmap()->map[i][j].x = j * cmap()->spacing + WIDTH / 2 - data()->line_length;
 			cmap()->map[i][j].y = i * cmap()->spacing + HEIGHT / 2 - data()->rows;
-			get_color(i, j);
+			get_color(i, j, buff[j]);
 			j++;
 		}
 		i++;
 	}
+	free_char_arr(buff);
 }
- void	get_color(int i, int j)
+ void	get_color(int i, int j, char *buff)
 {
+	int x;
+	int hexvalue;
+	int	temp;
+	char temp_char;
 	
-	if (cmap()->map[i][j].z <= -5)
-		cmap()->map[i][j].color = WHITE;
-	else if (cmap()->map[i][j].z <= 0)
-		cmap()->map[i][j].color = YELLOW;
-	else if (cmap()->map[i][j].z <= 5)
-		cmap()->map[i][j].color = SILVER;
-	else if (cmap()->map[i][j].z <= 10)
-		cmap()->map[i][j].color = RED;
-	else 
-		cmap()->map[i][j].color = BLACK;
+	hexvalue = 0;
+	x = 0;
+	temp = 0;
+	while (x < (int)ft_strlen(buff))
+	{
+		if (buff[x] == '0' && (buff[x + 1] == 'x' || buff[x + 1] == 'X'))
+		{
+			x += 2;
+			while (x < (int)ft_strlen(buff))
+			{
+				temp_char = buff[x];
+				temp = 0;
+				if (ft_isdigit(buff[x]))
+					temp = temp_char - '0';
+				else if (ft_isalpha(temp_char))
+					temp = (temp_char - 'A' + 10) & 0xF;
+				else
+					break ;
+				hexvalue = (hexvalue << 4) | temp;
+				x++;
+			}
+		}
+		x++;
+	}
+	cmap()->map[i][j].color = GREEN;
+	if (hexvalue)
+		cmap()->map[i][j].color = hexvalue;
 }
+
 void	get_point_map(char *file)
 {
 	static char **lines;
+	bool first;
 	
+	first = false;
 	if (!cmap()->map)
+	{
+		first = true;	
 		lines = get_map(file);
+	}
  	convert_to_point(lines);
 	grid_to_iso();
-	
+	if (first == true)
+		copy_map();
 }
 
 void	cal_line_length(char **lines)
@@ -102,7 +131,6 @@ void	cal_line_length(char **lines)
 	int count;
 	int	fcount;
 	bool space;
-	// need to change cus extra variables no longer checking if count is same ? 
 	i = 0;
 	count = 0;
 	fcount = 0;
@@ -125,11 +153,5 @@ void	cal_line_length(char **lines)
 		i++;
 		count = 0;
 	}
-	//printf("linelen %i\n", fcount);
 	data()->line_length = fcount + 1;
 }
-
-
-
-
-

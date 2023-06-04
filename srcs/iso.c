@@ -25,7 +25,7 @@ void	grid_to_iso(void)
 }
 
 
-void	print_grid(void)
+void	print_map(void)
 {
 	 int	x = -1;
 	 int	y;
@@ -43,6 +43,29 @@ void	print_grid(void)
 					&cmap()->map[data()->rows - 1][x + 1]);
 		}
 			plot_line(&cmap()->map[y][data()->line_length - 1], &cmap()->map[y
+				+ 1][data()->line_length - 1]);  
+	}  
+
+}
+
+void	print_original_map(void)
+{
+	 int	x = -1;
+	 int	y;
+
+	y = -1;
+	while (++y < data()->rows - 1)
+	{
+		x = -1;
+		while (++x < data()->line_length - 1)
+		{
+			plot_line(&cmap()->original_map[y][x], &cmap()->original_map[y][x + 1]);
+		 	plot_line(&cmap()->original_map[y][x], &cmap()->original_map[y + 1][x]);
+			if (y == 0)
+				plot_line(&cmap()->original_map[data()->rows - 1][x],
+					&cmap()->original_map[data()->rows - 1][x + 1]);
+		}
+			plot_line(&cmap()->original_map[y][data()->line_length - 1], &cmap()->original_map[y
 				+ 1][data()->line_length - 1]);  
 	}  
 
