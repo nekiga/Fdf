@@ -18,7 +18,6 @@ void	grid_to_iso(void)
 			cmap()->map[y][x].x = (wx - wy) * cos(0.523599) + cmap()->offset_x;
 			cmap()->map[y][x].y = (wx + wy) * sin(0.523599) - cmap()->offset_y
 			- cmap()->map[y][x].z * cmap()->elevation;
-			//cmap()->map[y][x].color = get_color(y, x);
 		}
 	}
 	limit();
