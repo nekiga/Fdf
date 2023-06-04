@@ -30,7 +30,6 @@ t_imge *cimg(void)
 t_point *cpoint(void)
 {
     static t_point point;
-
     return (&point);
 }
 

@@ -37,6 +37,8 @@ void init(void)
 	
 	data()->mlx = mlx_init();
 	data()->win = mlx_new_window(data()->mlx, WIDTH, HEIGHT, NAME);
+	data()->line_length = 0;
+	data()->rows = 0;
 	cmap()->elevation = 1;
 	cmap()->spacing = 20;
 	cmap()->offset_x = 500;

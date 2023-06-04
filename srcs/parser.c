@@ -23,23 +23,18 @@
 	if (!(fd = open(file, O_RDONLY)))
 		error("Could not open file", false);
 	i = 0;
-	data()->line_length = 0;
-	data()->rows = 0;
 	c[0] = '1';
-	while (read(fd, &c, 1)) // counts how many rows
+	while (read(fd, &c, 1))
 		if (c[0] == '\n')
 			data()->rows++;
-	lines = xmalloc(sizeof(char *) * data()->rows); // allocates amount of rows
+	lines = xmalloc(sizeof(char *) * data()->rows);
 	close(fd);
 	if (!(fd = open(file, O_RDONLY)))
 		error("Could not open file", false);
 	while (i  < data()->rows)
-	{
-		lines[i] = get_next_line(fd); // reads file and saves each row 
-		i++;	
-	}
+		lines[i++] = get_next_line(fd);
 	cal_line_length(lines);
-	
+	close(fd);
 	return (lines);
 	 
 }
@@ -68,21 +63,29 @@ void convert_to_point(char **lines)
 			j++;
 		}
 		i++;
-	}
+	} 
+	free(buff);
 }
  void	get_color(int i, int j)
 {
+
 	
-	if (cmap()->map[i][j].z <= -5)
+	if (cmap()->map[i][j].z * cmap()->elevation <= -10)
+		cmap()->map[i][j].color = GRAY;
+	else if (cmap()->map[i][j].z * cmap()->elevation <= 0)
 		cmap()->map[i][j].color = WHITE;
-	else if (cmap()->map[i][j].z <= 0)
-		cmap()->map[i][j].color = YELLOW;
-	else if (cmap()->map[i][j].z <= 5)
+	else if (cmap()->map[i][j].z * cmap()->elevation <= 14)
 		cmap()->map[i][j].color = SILVER;
-	else if (cmap()->map[i][j].z <= 10)
-		cmap()->map[i][j].color = RED;
+	else if (cmap()->map[i][j].z * cmap()->elevation <= 30)
+		cmap()->map[i][j].color = YELLOW;
+	else if (cmap()->map[i][j].z * cmap()->elevation  <= 40)
+		cmap()->map[i][j].color = ORANGE;
+	else if (cmap()->map[i][j].z * cmap()->elevation  <= 70)
+		cmap()->map[i][j].color = GREEN;
 	else 
-		cmap()->map[i][j].color = BLACK;
+		cmap()->map[i][j].color = WHITE;
+	//printf("%i\t%i\n", cmap()->map[i][j].z, x);
+	//x++;
 }
 void	get_point_map(char *file)
 {

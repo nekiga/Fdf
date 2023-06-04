@@ -17,6 +17,7 @@
 #define SILVER 	0xC0C0C0 	
 #define GRAY 	0x808080 
 #define BLACK 	0x000000 	
+#define ORANGE  0xFFA500
 #define RED 	0xFF0000 	
 #define MAROON 	0x800000 	
 #define YELLOW 	0xFFFF00 	

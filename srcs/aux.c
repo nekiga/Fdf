@@ -89,8 +89,31 @@ void destructor(void)
 	// do frees
 	exit(0);
 }
-
-void print_values(void)
+int	fdf_atoi(char *str)
 {
-	
+	int	i;
+	int	res;
+	int	sign;
+	char **color;
+
+	sign = 1;
+	i = 0;
+	res = 0;
+	while (str[i] == 32 || (str[i] <= 13 && str[i] >= 9))
+		i++;
+	if (str[i] == '-' || str[i] == '+')
+	{
+		if (str[i] == '-')
+			sign = -1;
+		i++;
+	}
+	if (str[i] == ',')
+	{
+		color = ft_split(str, ',');
+
+	}
+	while (str[i] != '\0' && ft_isdigit(str[i]))
+		res = res * 10 + str[i++] - 48;
+	return (res * sign);
 }
+
