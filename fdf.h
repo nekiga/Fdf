@@ -111,12 +111,14 @@ t_map	*cmap(void);
 void	*xmalloc(size_t size);
 void init();
 void	img_init(void);
-void error(char *s, bool allo);
+void error(char *s);
 void	cal_line_length(char **lines);
 void print_map(void);
 void destructor(void);
 void	get_color(int i, int j, char *buff);
-void	free_char_arr(char **arr);
+void	free_arr(void **arr, int size);
+bool is_valid(char *av);
+
 //Parser functions
 char **get_map(char *file);
 void convert_to_point(char **lines);

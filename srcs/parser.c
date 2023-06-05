@@ -12,16 +12,14 @@
 
 #include "../fdf.h"
 
-// opens map and makes the lines
-// need to adapt the code so it can also save the color value of each map 
  char **get_map(char *file)
 {
 	char **lines;
 	char c[1];
 	int	fd;
 	int i;
-	if (!(fd = open(file, O_RDONLY)))
-		error("Could not open file", false);
+	if ((fd = open(file, O_RDONLY)) == -1)
+		error("Error opening file\n");
 	i = 0;
 	c[0] = '1';
 	while (read(fd, &c, 1))
@@ -29,17 +27,10 @@
 			data()->rows++;
 	lines = xmalloc(sizeof(char *) * data()->rows);
 	close(fd);
-	if (!(fd = open(file, O_RDONLY)))
-		error("Could not open file", false);
+	if ((fd = open(file, O_RDONLY)) == -1)
+		error("Error opening file\n");
 	while (i  < data()->rows)
-<<<<<<< HEAD
-	{
-		lines[i] = get_next_line(fd);
-		i++;	
-	}
-=======
 		lines[i++] = get_next_line(fd);
->>>>>>> f633b7dc8cf2c45fe056b97d5fedae8ada725d5d
 	cal_line_length(lines);
 	close(fd);
 	return (lines);
@@ -70,17 +61,11 @@ void convert_to_point(char **lines)
 			j++;
 		}
 		i++;
-<<<<<<< HEAD
-	}
-	free_char_arr(buff);
-=======
 	} 
-	free(buff);
->>>>>>> f633b7dc8cf2c45fe056b97d5fedae8ada725d5d
+	free_arr((void **)buff, data()->rows);
 }
  void	get_color(int i, int j, char *buff)
 {
-<<<<<<< HEAD
 	int x;
 	int hexvalue;
 	int	temp;
@@ -113,26 +98,6 @@ void convert_to_point(char **lines)
 	cmap()->map[i][j].color = GREEN;
 	if (hexvalue)
 		cmap()->map[i][j].color = hexvalue;
-=======
-
-	
-	if (cmap()->map[i][j].z * cmap()->elevation <= -10)
-		cmap()->map[i][j].color = GRAY;
-	else if (cmap()->map[i][j].z * cmap()->elevation <= 0)
-		cmap()->map[i][j].color = WHITE;
-	else if (cmap()->map[i][j].z * cmap()->elevation <= 14)
-		cmap()->map[i][j].color = SILVER;
-	else if (cmap()->map[i][j].z * cmap()->elevation <= 30)
-		cmap()->map[i][j].color = YELLOW;
-	else if (cmap()->map[i][j].z * cmap()->elevation  <= 40)
-		cmap()->map[i][j].color = ORANGE;
-	else if (cmap()->map[i][j].z * cmap()->elevation  <= 70)
-		cmap()->map[i][j].color = GREEN;
-	else 
-		cmap()->map[i][j].color = WHITE;
-	//printf("%i\t%i\n", cmap()->map[i][j].z, x);
-	//x++;
->>>>>>> f633b7dc8cf2c45fe056b97d5fedae8ada725d5d
 }
 
 void	get_point_map(char *file)

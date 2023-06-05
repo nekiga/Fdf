@@ -23,12 +23,10 @@ void	*xmalloc(size_t size)
 	return (result);
 }
 
-void error(char *s, bool allo)
+void error(char *s)
 {
 	ft_printf("%s\n", s);
-	if (allo == true)
-		exit(1);
-	return ;
+	destructor();
 }
 
 /* void print_map(void)
@@ -94,6 +92,10 @@ void destructor(void)
 		mlx_destroy_display(data()->mlx);
 		free(data()->mlx);
 	}
+	if (cmap()->map)
+		free_arr((void **)cmap()->map, data()->rows);
+	if (cmap()->original_map)
+		free_arr((void **)cmap()->original_map, data()->rows);
 	exit(0);
 }
 
@@ -121,12 +123,29 @@ void copy_map(void)
 	
 }
 
-void	free_char_arr(char **arr)
+void	free_arr(void **arr, int size)
 {
 	int	i;
 
 	i = 0;
-	while (arr[i])
+	while (i != size)
 		free(arr[i++]);
 	free(arr);
+}
+
+bool is_valid(char *av)
+{
+	int	i;
+
+	i = 0;
+	while (av[i])
+	{
+		if (i <= (int)ft_strlen(av) - 3)
+		{
+			if (av[i] == '.' && av[i + 1] == 'f' && av[i + 2] == 'd' && av[ i + 3] == 'f' && av[i + 4] == '\0')
+				return (true);
+		}
+		i++;
+	}
+	return (false);
 }
