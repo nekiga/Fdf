@@ -149,3 +149,62 @@ bool is_valid(char *av)
 	}
 	return (false);
 }
+
+void print_values(void)
+{
+	int	i;
+	int	j;
+
+	i = 0;
+	printf("x\n");
+	while (i < data()->rows)
+	{
+		j = 0;
+		while (j < data()->line_length)
+		{
+			printf("[%i]", cmap()->map[i][j].x);
+			j++;
+		}
+		printf("\n");
+		i++;
+	}
+	i = 0;
+	printf("y\n");
+	while (i < data()->rows)
+	{
+		j = 0;
+		while (j < data()->line_length)
+		{
+			printf("[%i]", cmap()->map[i][j].y);
+			j++;
+		}
+		printf("\n");
+		i++;
+	}
+	/*i = 0;
+	printf("z\n");
+	while (i < data()->rows)
+	{
+		j = 0;
+		while (j < data()->line_length)
+		{
+			printf("[%i]", cmap()->map[i][j].z);
+			j++;
+		}
+		printf("\n");
+		i++;
+	}
+	i = 0;
+	printf("color\n");
+	while (i < data()->rows)
+	{
+		j = 0;
+		while (j < data()->line_length)
+		{
+			printf("%0x", cmap()->map[i][j].color);
+			j++;
+		}
+		printf("\n");
+		i++;
+	}*/
+}

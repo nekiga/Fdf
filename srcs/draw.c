@@ -111,6 +111,7 @@ void	renderer()
 		get_point_map(data()->file);
 		img_init();
 		print_map();
+		//print_values();
 		mlx_put_image_to_window(data()->mlx, data()->win, cimg()->img, 0, 0);
 		menu();
 }

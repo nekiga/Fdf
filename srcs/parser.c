@@ -50,7 +50,7 @@ void convert_to_point(char **lines)
 	while (i < data()->rows)
 	{
 		j = 0;
-		buff = ft_split(lines[i],' ');
+		buff = ft_split(lines[i], ' ');
 		cmap()->map[i] = xmalloc(sizeof(t_point ) * data()->line_length + 1);
 		while (buff[j] && j < data()->line_length)
 		{
@@ -58,11 +58,12 @@ void convert_to_point(char **lines)
 			cmap()->map[i][j].x = j * cmap()->spacing + WIDTH / 2 - data()->line_length;
 			cmap()->map[i][j].y = i * cmap()->spacing + HEIGHT / 2 - data()->rows;
 			get_color(i, j, buff[j]);
+			//free(buff[j]);
 			j++;
 		}
+		//free(buff);
 		i++;
 	} 
-	free_arr((void **)buff, data()->rows);
 }
  void	get_color(int i, int j, char *buff)
 {

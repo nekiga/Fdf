@@ -118,6 +118,7 @@ void destructor(void);
 void	get_color(int i, int j, char *buff);
 void	free_arr(void **arr, int size);
 bool is_valid(char *av);
+void print_values(void);
 
 //Parser functions
 char **get_map(char *file);
