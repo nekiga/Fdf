@@ -6,7 +6,7 @@
 /*   By: garibeir < garibeir@student.42lisboa.com > +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/01 16:47:16 by garibeir          #+#    #+#             */
-/*   Updated: 2023/06/04 13:07:17 by garibeir         ###   ########.fr       */
+/*   Updated: 2023/06/11 16:57:32 by garibeir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,9 +22,9 @@ int key_handler(int key)
         cmap()->elevation++;
         renderer();
     }
-    if (key == RIGHT && cmap()->spacing + 10 < WIDTH / 3)
+    if (key == RIGHT && cmap()->spacing + 10 < WIDTH / 2)
     {
-        cmap()->spacing += 10;
+        cmap()->spacing += 20;
         renderer();
     }
     if (key == DOWN)

@@ -6,7 +6,7 @@
 /*   By: garibeir < garibeir@student.42lisboa.com > +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/01 16:47:31 by garibeir          #+#    #+#             */
-/*   Updated: 2023/06/04 13:22:00 by garibeir         ###   ########.fr       */
+/*   Updated: 2023/06/11 19:12:35 by garibeir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -128,3 +128,4 @@ void	renderer_original()
 		mlx_put_image_to_window(data()->mlx, data()->win, cimg()->img, 0, 0);
 		menu();
 }
+

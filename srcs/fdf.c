@@ -6,7 +6,7 @@
 /*   By: garibeir < garibeir@student.42lisboa.com > +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/01 16:47:10 by garibeir          #+#    #+#             */
-/*   Updated: 2023/06/04 17:57:27 by garibeir         ###   ########.fr       */
+/*   Updated: 2023/06/11 19:05:07 by garibeir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,7 @@
 
 //slay xx
 // still has memory leaks
-// need to do function to check values of the map
-// t1 and t2 are going gayzy
-// check if hex valuesa re not messing with other values
-// getting negative y values on t1
+
 int main(int ac, char **av)
 {
 	

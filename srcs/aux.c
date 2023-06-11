@@ -6,7 +6,7 @@
 /*   By: garibeir < garibeir@student.42lisboa.com > +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/01 16:52:13 by garibeir          #+#    #+#             */
-/*   Updated: 2023/06/04 18:02:47 by garibeir         ###   ########.fr       */
+/*   Updated: 2023/06/11 19:17:20 by garibeir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,7 @@ void error(char *s)
 void destructor(void)
 {
 	// free maps
-	
+
 	if (cimg()->img)
 		mlx_destroy_image(data()->mlx, cimg()->img);
 	if (data()->win)
@@ -92,10 +92,12 @@ void destructor(void)
 		mlx_destroy_display(data()->mlx);
 		free(data()->mlx);
 	}
-	if (cmap()->map)
-		free_arr((void **)cmap()->map, data()->rows);
+	/*  if (cmap()->map)
+		free_arr((void **)cmap()->map);
 	if (cmap()->original_map)
-		free_arr((void **)cmap()->original_map, data()->rows);
+		free_arr((void **)cmap()->original_map);
+	/* if(data()->lines)
+		free_arr((void **)data()->lines); */
 	exit(0);
 }
 
@@ -123,13 +125,17 @@ void copy_map(void)
 	
 }
 
-void	free_arr(void **arr, int size)
+void	free_arr(void **arr)
 {
 	int	i;
 
 	i = 0;
-	while (i != size)
-		free(arr[i++]);
+
+	while (i < data()->rows)
+	{
+		free((arr[i]));
+		i++;		
+	}
 	free(arr);
 }
 
@@ -155,7 +161,7 @@ void print_values(void)
 	int	i;
 	int	j;
 
-	i = 0;
+	/* i = 0;
 	printf("x\n");
 	while (i < data()->rows)
 	{
@@ -167,10 +173,10 @@ void print_values(void)
 		}
 		printf("\n");
 		i++;
-	}
-	i = 0;
+	} */
+ 	i = 0;
 	printf("y\n");
-	while (i < data()->rows)
+	while (i < data()->rows )
 	{
 		j = 0;
 		while (j < data()->line_length)
@@ -180,7 +186,7 @@ void print_values(void)
 		}
 		printf("\n");
 		i++;
-	}
+	} 
 	/*i = 0;
 	printf("z\n");
 	while (i < data()->rows)

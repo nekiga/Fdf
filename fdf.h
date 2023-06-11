@@ -6,7 +6,7 @@
 /*   By: garibeir < garibeir@student.42lisboa.com > +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/01 16:47:43 by garibeir          #+#    #+#             */
-/*   Updated: 2023/06/04 15:22:55 by garibeir         ###   ########.fr       */
+/*   Updated: 2023/06/11 18:55:59 by garibeir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@ typedef struct	s_data
 	int		rows;
 	int		endian;
 	char	*file;
+	char **lines;
 
 }				t_data;
 
@@ -89,6 +90,14 @@ typedef struct s_map
 	int		offset_y;
 }			t_map;
 
+typedef struct	s_color
+{
+	int		red;
+	int		green;
+	int		blue;
+}				t_color;
+
+
 // Drawing functions
 void	pixel_put(int x, int y, int color);
 void	plot_line(t_point *start, t_point *end);
@@ -106,23 +115,22 @@ t_data   *data(void);
 t_imge 	*cimg(void);
 t_point     *cpoint(void);
 t_map	*cmap(void);
-
 // Auxiliary functions
 void	*xmalloc(size_t size);
 void init();
 void	img_init(void);
 void error(char *s);
-void	cal_line_length(char **lines);
+void	cal_line_length(void);
 void print_map(void);
 void destructor(void);
 void	get_color(int i, int j, char *buff);
-void	free_arr(void **arr, int size);
+void	free_arr(void **arr);
 bool is_valid(char *av);
 void print_values(void);
 
 //Parser functions
-char **get_map(char *file);
-void convert_to_point(char **lines);
+void	get_map(char *file);
+void convert_to_point(void);
 void	get_point_map(char *file);
 int	limits(void);
 void menu(void);

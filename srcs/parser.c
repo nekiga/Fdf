@@ -6,18 +6,18 @@
 /*   By: garibeir < garibeir@student.42lisboa.com > +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/16 16:50:05 by garibeir          #+#    #+#             */
-/*   Updated: 2023/06/04 17:55:42 by garibeir         ###   ########.fr       */
+/*   Updated: 2023/06/11 19:03:30 by garibeir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../fdf.h"
 
- char **get_map(char *file)
+void	get_map(char *file)
 {
-	char **lines;
 	char c[1];
 	int	fd;
 	int i;
+	
 	if ((fd = open(file, O_RDONLY)) == -1)
 		error("Error opening file\n");
 	i = 0;
@@ -25,21 +25,19 @@
 	while (read(fd, &c, 1))
 		if (c[0] == '\n')
 			data()->rows++;
-	lines = xmalloc(sizeof(char *) * data()->rows);
+	data()->lines = xmalloc(sizeof(char *) * data()->rows);
 	close(fd);
 	if ((fd = open(file, O_RDONLY)) == -1)
 		error("Error opening file\n");
 	while (i  < data()->rows)
-		lines[i++] = get_next_line(fd);
-	cal_line_length(lines);
+		data()->lines[i++] = get_next_line(fd);
+	cal_line_length();
 	close(fd);
-	return (lines);
-	 
 }
 // Parse that file girl!! u slay xx 
 // Turns the array of chars into an array of structs
 
-void convert_to_point(char **lines)
+void convert_to_point(void)
 {
 	int		i;
 	int		j;
@@ -50,19 +48,19 @@ void convert_to_point(char **lines)
 	while (i < data()->rows)
 	{
 		j = 0;
-		buff = ft_split(lines[i], ' ');
-		cmap()->map[i] = xmalloc(sizeof(t_point ) * data()->line_length + 1);
-		while (buff[j] && j < data()->line_length)
+		buff = ft_split(data()->lines[i], ' ');
+		cmap()->map[i] = xmalloc(sizeof(t_point ) * data()->line_length );
+		while (buff[j] && j < data()->line_length )
 		{
 			cmap()->map[i][j].z = ft_atoi(buff[j]);
-			cmap()->map[i][j].x = j * cmap()->spacing + WIDTH / 2 - data()->line_length;
+			cmap()->map[i][j].x = j * cmap()->spacing + WIDTH / 2 - data()->line_length ;
 			cmap()->map[i][j].y = i * cmap()->spacing + HEIGHT / 2 - data()->rows;
 			get_color(i, j, buff[j]);
-			//free(buff[j]);
+			free(buff[j]);
 			j++;
 		}
-		//free(buff);
 		i++;
+		free(buff);
 	} 
 }
  void	get_color(int i, int j, char *buff)
@@ -103,42 +101,42 @@ void convert_to_point(char **lines)
 
 void	get_point_map(char *file)
 {
-	static char **lines;
 	bool first;
 	
 	first = false;
 	if (!cmap()->map)
 	{
-		first = true;	
-		lines = get_map(file);
+		first = true;
+		get_map(file);
 	}
- 	convert_to_point(lines);
+ 	convert_to_point();
 	grid_to_iso();
 	if (first == true)
 		copy_map();
 }
 
-void	cal_line_length(char **lines)
+void	cal_line_length(void)
 {
 	int	i;
 	int	j;
 	int count;
 	int	fcount;
 	bool space;
+	
 	i = 0;
 	count = 0;
 	fcount = 0;
 	while(i != data()->rows)
 	{
 		j = 0;
-		while (lines[i][j])
+		while (data()->lines[i][j])
 		{
-			if (lines[i][j] == ' ' && space != true)
+			if (data()->lines[i][j] == ' ' && space != true)
 			{
 				count++;
 				space = true;
 			}
-			if (lines[i][j + 1] != ' ')
+			if (data()->lines[i][j + 1] != ' ')
 				space = false;
 			j++;
 		}
@@ -147,5 +145,5 @@ void	cal_line_length(char **lines)
 		i++;
 		count = 0;
 	}
-	data()->line_length = fcount + 1;
+	data()->line_length = fcount;
 }
