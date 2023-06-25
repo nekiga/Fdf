@@ -127,4 +127,5 @@ void	get_point_map(char *file);
 int	limits(void);
 void menu(void);
 void copy_map(void);
+void	allocate_map(void);
 #endif

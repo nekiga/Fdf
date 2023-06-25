@@ -14,11 +14,7 @@
 #include "../fdf.h"
 
 //slay xx
-// still has memory leaks
-// need to do function to check values of the map
-// t1 and t2 are going gayzy
-// check if hex valuesa re not messing with other values
-// getting negative y values on t1
+// adapt convert to point to allocate buff externally
 int main(int ac, char **av)
 {
 	
@@ -30,6 +26,7 @@ int main(int ac, char **av)
     init();
 	img_init();
 	renderer();
+	//print_values();
 	mlx_key_hook(data()->win, &key_handler, data());
 	mlx_hook(data()->win, EVENT_CLOSE_BTN, 1L << 2, (void *)destructor, 0);
 	mlx_loop(data()->mlx);

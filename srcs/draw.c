@@ -96,18 +96,17 @@ void	plot_line(t_point *start, t_point *end)
 
 void img_init(void)
 {
-	
+	if (cmap()->map)
+		{
+			mlx_destroy_image(data()->mlx, cimg()->img);
+			mlx_clear_window(data()->mlx, data()->win);
+		}
 	cimg()->img = mlx_new_image(data()->mlx, WIDTH, HEIGHT);
 	cimg()->addr = mlx_get_data_addr(cimg()->img, &data()->bits_per_pixel, &cimg()->line_len, &data()->endian);
 }
 
 void	renderer()
 {
-		if (cmap()->map)
-		{
-			mlx_destroy_image(data()->mlx, cimg()->img);
-			mlx_clear_window(data()->mlx, data()->win);
-		}
 		get_point_map(data()->file);
 		img_init();
 		print_map();
@@ -118,11 +117,7 @@ void	renderer()
 
 void	renderer_original()
 {
-		if (cmap()->map)
-		{
-			mlx_destroy_image(data()->mlx, cimg()->img);
-			mlx_clear_window(data()->mlx, data()->win);
-		}
+		
 		img_init();
 		print_original_map();
 		mlx_put_image_to_window(data()->mlx, data()->win, cimg()->img, 0, 0);

@@ -79,8 +79,6 @@ void error(char *s)
 
 void destructor(void)
 {
-	// free maps
-	
 	if (cimg()->img)
 		mlx_destroy_image(data()->mlx, cimg()->img);
 	if (data()->win)
@@ -128,7 +126,7 @@ void	free_arr(void **arr, int size)
 	int	i;
 
 	i = 0;
-	while (i != size)
+	while (i < size)
 		free(arr[i++]);
 	free(arr);
 }
@@ -162,12 +160,12 @@ void print_values(void)
 		j = 0;
 		while (j < data()->line_length)
 		{
-			printf("[%i]", cmap()->map[i][j].x);
+			printf("[%i!%i]", cmap()->map[i][j].x, cmap()->map[i][j].y);
 			j++;
 		}
 		printf("\n");
 		i++;
-	}
+	}/*
 	i = 0;
 	printf("y\n");
 	while (i < data()->rows)
@@ -180,7 +178,7 @@ void print_values(void)
 		}
 		printf("\n");
 		i++;
-	}
+	}*/
 	/*i = 0;
 	printf("z\n");
 	while (i < data()->rows)

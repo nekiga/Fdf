@@ -39,6 +39,8 @@
 // Parse that file girl!! u slay xx 
 // Turns the array of chars into an array of structs
 
+
+// ok why am i allocation the stuff in this function? i only need to allocate buff one time, do it externally
 void convert_to_point(char **lines)
 {
 	int		i;
@@ -46,24 +48,32 @@ void convert_to_point(char **lines)
 	char **buff;
 	
 	i = 0;
-	cmap()->map = xmalloc(sizeof(t_point *) * data()->rows);
 	while (i < data()->rows)
 	{
 		j = 0;
 		buff = ft_split(lines[i], ' ');
-		cmap()->map[i] = xmalloc(sizeof(t_point ) * data()->line_length + 1);
-		while (buff[j] && j < data()->line_length)
+		while (buff[j] && j < data()->line_length )
 		{
 			cmap()->map[i][j].z = ft_atoi(buff[j]);
 			cmap()->map[i][j].x = j * cmap()->spacing + WIDTH / 2 - data()->line_length;
 			cmap()->map[i][j].y = i * cmap()->spacing + HEIGHT / 2 - data()->rows;
 			get_color(i, j, buff[j]);
-			//free(buff[j]);
+			free(buff[j]);
 			j++;
 		}
-		//free(buff);
+		free(buff);
 		i++;
-	} 
+	}
+}
+void	allocate_map(void)
+{
+	int	i;
+
+	i = 0;
+	cmap()->map = xmalloc(sizeof(t_point *) * data()->rows);
+	while (i < data()->rows)
+	
+		cmap()->map[i++] = xmalloc(sizeof(t_point ) * data()->line_length);
 }
  void	get_color(int i, int j, char *buff)
 {
@@ -111,6 +121,7 @@ void	get_point_map(char *file)
 	{
 		first = true;	
 		lines = get_map(file);
+		allocate_map();
 	}
  	convert_to_point(lines);
 	grid_to_iso();
@@ -147,5 +158,5 @@ void	cal_line_length(char **lines)
 		i++;
 		count = 0;
 	}
-	data()->line_length = fcount + 1;
+	data()->line_length = fcount ;
 }
