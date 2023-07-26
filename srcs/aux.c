@@ -94,6 +94,8 @@ void destructor(void)
 		free_arr((void **)cmap()->map, data()->rows);
 	if (cmap()->original_map)
 		free_arr((void **)cmap()->original_map, data()->rows);
+	if (data()->lines)
+		free_arr((void **)data()->lines, data()->rows);
 	exit(0);
 }
 

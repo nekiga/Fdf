@@ -40,31 +40,32 @@
 // Turns the array of chars into an array of structs
 
 
-// ok why am i allocation the stuff in this function? i only need to allocate buff one time, do it externally
-void convert_to_point(char **lines)
+void convert_to_point(void)
 {
 	int		i;
 	int		j;
-	char **buff;
 	
 	i = 0;
 	while (i < data()->rows)
 	{
 		j = 0;
-		buff = ft_split(lines[i], ' ');
-		while (buff[j] && j < data()->line_length )
+		data()->buff = ft_split(data()->lines[i], ' ');
+		while (data()->buff[j] && j < data()->line_length)
 		{
-			cmap()->map[i][j].z = ft_atoi(buff[j]);
+			cmap()->map[i][j].z = ft_atoi(data()->buff[j]);
 			cmap()->map[i][j].x = j * cmap()->spacing + WIDTH / 2 - data()->line_length;
 			cmap()->map[i][j].y = i * cmap()->spacing + HEIGHT / 2 - data()->rows;
-			get_color(i, j, buff[j]);
-			free(buff[j]);
+			get_color(i, j, data()->buff[j]);
+			free(data()->buff[j]);
 			j++;
 		}
-		free(buff);
+		free(data()->buff[j]);
+		free(data()->buff);
 		i++;
 	}
 }
+
+
 void	allocate_map(void)
 {
 	int	i;
@@ -72,9 +73,9 @@ void	allocate_map(void)
 	i = 0;
 	cmap()->map = xmalloc(sizeof(t_point *) * data()->rows);
 	while (i < data()->rows)
-	
 		cmap()->map[i++] = xmalloc(sizeof(t_point ) * data()->line_length);
 }
+
  void	get_color(int i, int j, char *buff)
 {
 	int x;
@@ -113,17 +114,16 @@ void	allocate_map(void)
 
 void	get_point_map(char *file)
 {
-	static char **lines;
 	bool first;
 	
 	first = false;
 	if (!cmap()->map)
 	{
 		first = true;	
-		lines = get_map(file);
+		data()->lines = get_map(file);
 		allocate_map();
 	}
- 	convert_to_point(lines);
+ 	convert_to_point();
 	grid_to_iso();
 	if (first == true)
 		copy_map();
@@ -158,5 +158,5 @@ void	cal_line_length(char **lines)
 		i++;
 		count = 0;
 	}
-	data()->line_length = fcount ;
+	data()->line_length = fcount + 1;
 }

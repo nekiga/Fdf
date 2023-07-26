@@ -39,6 +39,8 @@ typedef struct	s_data
 	void	*addr;
 	void	*mlx;
 	char 	*win;
+	char	**lines;
+	char	**buff;
     int     width;
     int     height;
 	int		bits_per_pixel;
@@ -122,7 +124,7 @@ void print_values(void);
 
 //Parser functions
 char **get_map(char *file);
-void convert_to_point(char **lines);
+void convert_to_point(void);
 void	get_point_map(char *file);
 int	limits(void);
 void menu(void);
