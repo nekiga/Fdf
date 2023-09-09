@@ -8,6 +8,7 @@ void	grid_to_iso(void)
 	int	wy;
 
 	y = -1;
+	
 	while (++y < data()->rows)
 	{
 		x = -1;
@@ -91,6 +92,7 @@ int	limits(void)
 
 void	limit(void)
 {
+	
 	if (!limits())
 	{
 		if (cmap()->spacing > 5)

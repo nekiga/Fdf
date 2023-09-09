@@ -82,6 +82,10 @@ void	plot_line(t_point *start, t_point *end)
 
 	x = start->x;
 	y = start->y;
+	if (start->x < 1|| start->y < 1)
+		return ;
+	if (end->x < 1|| end->y < 1)
+		return ;
 	plot = calculate_line(start, end);
 	while (1)
 	{

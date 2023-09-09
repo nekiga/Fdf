@@ -25,6 +25,7 @@ int main(int ac, char **av)
 	data()->file = av[1];
     init();
 	img_init();
+	
 	renderer();
 	//print_values();
 	mlx_key_hook(data()->win, &key_handler, data());
@@ -41,8 +42,8 @@ void init(void)
 	data()->rows = 0;
 	cmap()->elevation = 1;
 	cmap()->spacing = 20;
-	cmap()->offset_x = 500;
-	cmap()->offset_y = 400;
+	cmap()->offset_x = 600;
+	cmap()->offset_y = 200;
 	
 }
 

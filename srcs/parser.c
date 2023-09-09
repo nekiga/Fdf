@@ -18,6 +18,7 @@
 	char c[1];
 	int	fd;
 	int i;
+
 	if ((fd = open(file, O_RDONLY)) == -1)
 		error("Error opening file\n");
 	i = 0;
@@ -45,7 +46,7 @@ void convert_to_point(void)
 	int		i;
 	int		j;
 	
-	i = 0;
+	i = 0; 
 	while (i < data()->rows)
 	{
 		j = 0;
@@ -123,6 +124,8 @@ void	get_point_map(char *file)
 		data()->lines = get_map(file);
 		allocate_map();
 	}
+	if (data()->line_length > 500)
+		cmap()->spacing = 2;
  	convert_to_point();
 	grid_to_iso();
 	if (first == true)
