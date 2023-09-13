@@ -6,13 +6,12 @@
 /*   By: garibeir < garibeir@student.42lisboa.com > +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/29 15:38:08 by garibeir          #+#    #+#             */
-/*   Updated: 2022/11/14 13:41:37 by garibeir         ###   ########.fr       */
+/*   Updated: 2023/09/13 15:51:51 by garibeir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef LIBFT_H
 # define LIBFT_H
-
 
 # ifndef BUFFER_SIZE
 #  define BUFFER_SIZE 1

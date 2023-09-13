@@ -6,12 +6,11 @@
 /*   By: garibeir < garibeir@student.42lisboa.com > +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/28 15:03:13 by garibeir          #+#    #+#             */
-/*   Updated: 2022/12/07 18:14:56 by garibeir         ###   ########.fr       */
+/*   Updated: 2023/09/13 15:50:37 by garibeir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
-
 
 char	*ft_strjoin1(char *s1, char *s2)
 {

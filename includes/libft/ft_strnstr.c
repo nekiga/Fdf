@@ -6,7 +6,7 @@
 /*   By: garibeir < garibeir@student.42lisboa.com > +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/24 16:45:03 by garibeir          #+#    #+#             */
-/*   Updated: 2022/10/29 15:37:42 by garibeir         ###   ########.fr       */
+/*   Updated: 2023/09/13 15:51:18 by garibeir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ char	*ft_strnstr(const char *haystack, const char *needle, size_t n)
 				j++;
 			}
 			j = 0;
-		}	
+		}
 		i++;
 	}
 	return (NULL);

@@ -6,56 +6,59 @@
 /*   By: garibeir < garibeir@student.42lisboa.com > +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/16 16:50:05 by garibeir          #+#    #+#             */
-/*   Updated: 2023/06/04 17:55:42 by garibeir         ###   ########.fr       */
+/*   Updated: 2023/09/13 16:25:06 by garibeir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../fdf.h"
 
- char **get_map(char *file)
+char	**get_map(char *file)
 {
-	char **lines;
-	char c[1];
-	int	fd;
-	int i;
+	char	**lines;
+	char	c[1];
+	int		fd;
+	int		i;
 
-	if ((fd = open(file, O_RDONLY)) == -1)
+	fd = open(file, O_RDONLY);
+	if (fd == -1)
 		error("Error opening file\n");
 	i = 0;
 	c[0] = '1';
 	while (read(fd, &c, 1))
 		if (c[0] == '\n')
 			data()->rows++;
+	if (!data()->rows)
+		destructor();
 	lines = xmalloc(sizeof(char *) * data()->rows);
 	close(fd);
-	if ((fd = open(file, O_RDONLY)) == -1)
+	fd = open(file, O_RDONLY);
+	if (fd == -1)
 		error("Error opening file\n");
-	while (i  < data()->rows)
+	while (i < data()->rows)
 		lines[i++] = get_next_line(fd);
-	cal_line_length(lines);
+	cal_line_length(lines[0]);
 	close(fd);
 	return (lines);
-	 
 }
-// Parse that file girl!! u slay xx 
 // Turns the array of chars into an array of structs
 
-
-void convert_to_point(void)
+void	convert_to_point(void)
 {
-	int		i;
-	int		j;
-	
-	i = 0; 
+	int	i;
+	int	j;
+
+	i = 0;
 	while (i < data()->rows)
 	{
 		j = 0;
-		data()->buff = ft_split(data()->lines[i], ' ');
+		(data()->buff) = ft_split(data()->lines[i], ' ');
 		while (data()->buff[j] && j < data()->line_length)
 		{
 			cmap()->map[i][j].z = ft_atoi(data()->buff[j]);
-			cmap()->map[i][j].x = j * cmap()->spacing + WIDTH / 2 - data()->line_length;
-			cmap()->map[i][j].y = i * cmap()->spacing + HEIGHT / 2 - data()->rows;
+			cmap()->map[i][j].x = j * cmap()->spacing + WIDTH / 2
+			-data()->line_length;
+			cmap()->map[i][j].y = i * cmap()->spacing + HEIGHT / 2
+			- data()->rows;
 			get_color(i, j, data()->buff[j]);
 			free(data()->buff[j]);
 			j++;
@@ -66,7 +69,6 @@ void convert_to_point(void)
 	}
 }
 
-
 void	allocate_map(void)
 {
 	int	i;
@@ -74,92 +76,47 @@ void	allocate_map(void)
 	i = 0;
 	cmap()->map = xmalloc(sizeof(t_point *) * data()->rows);
 	while (i < data()->rows)
-		cmap()->map[i++] = xmalloc(sizeof(t_point ) * data()->line_length);
+		cmap()->map[i++] = xmalloc(sizeof(t_point) * data()->line_length);
 }
 
- void	get_color(int i, int j, char *buff)
+void	get_color_sub(int x, int *hexvalue, char *buff)
 {
-	int x;
-	int hexvalue;
-	int	temp;
-	char temp_char;
-	
+	int		temp;
+	char	temp_char;
+
+	temp = 0;
+	while (x < (int)ft_strlen(buff))
+	{
+		temp_char = buff[x];
+		temp = 0;
+		if (ft_isdigit(buff[x]))
+			temp = temp_char - '0';
+		else if (ft_isalpha(temp_char))
+			temp = (temp_char - 'A' + 10) & 0xF;
+		else
+			break ;
+		*hexvalue = (*hexvalue << 4) | temp;
+		x++;
+	}
+}
+
+void	get_color(int i, int j, char *buff)
+{
+	int		x;
+	int		hexvalue;
+
 	hexvalue = 0;
 	x = 0;
-	temp = 0;
 	while (x < (int)ft_strlen(buff))
 	{
 		if (buff[x] == '0' && (buff[x + 1] == 'x' || buff[x + 1] == 'X'))
 		{
 			x += 2;
-			while (x < (int)ft_strlen(buff))
-			{
-				temp_char = buff[x];
-				temp = 0;
-				if (ft_isdigit(buff[x]))
-					temp = temp_char - '0';
-				else if (ft_isalpha(temp_char))
-					temp = (temp_char - 'A' + 10) & 0xF;
-				else
-					break ;
-				hexvalue = (hexvalue << 4) | temp;
-				x++;
-			}
+			get_color_sub(x, &hexvalue, buff);
 		}
 		x++;
 	}
 	cmap()->map[i][j].color = GREEN;
 	if (hexvalue)
 		cmap()->map[i][j].color = hexvalue;
-}
-
-void	get_point_map(char *file)
-{
-	bool first;
-	
-	first = false;
-	if (!cmap()->map)
-	{
-		first = true;	
-		data()->lines = get_map(file);
-		allocate_map();
-	}
-	if (data()->line_length > 500)
-		cmap()->spacing = 2;
- 	convert_to_point();
-	grid_to_iso();
-	if (first == true)
-		copy_map();
-}
-
-void	cal_line_length(char **lines)
-{
-	int	i;
-	int	j;
-	int count;
-	int	fcount;
-	bool space;
-	i = 0;
-	count = 0;
-	fcount = 0;
-	while(i != data()->rows)
-	{
-		j = 0;
-		while (lines[i][j])
-		{
-			if (lines[i][j] == ' ' && space != true)
-			{
-				count++;
-				space = true;
-			}
-			if (lines[i][j + 1] != ' ')
-				space = false;
-			j++;
-		}
-		if (i == 0)
-			fcount = count;			
-		i++;
-		count = 0;
-	}
-	data()->line_length = fcount + 1;
 }

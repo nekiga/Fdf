@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   iso.c                                              :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: garibeir < garibeir@student.42lisboa.com > +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/09/13 13:56:55 by garibeir          #+#    #+#             */
+/*   Updated: 2023/09/13 16:25:24 by garibeir         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../fdf.h"
 
 void	grid_to_iso(void)
@@ -8,7 +20,6 @@ void	grid_to_iso(void)
 	int	wy;
 
 	y = -1;
-	
 	while (++y < data()->rows)
 	{
 		x = -1;
@@ -24,12 +35,12 @@ void	grid_to_iso(void)
 	limit();
 }
 
-
 void	print_map(void)
 {
-	 int	x = -1;
-	 int	y;
+	int	x;
+	int	y;
 
+	x = -1;
 	y = -1;
 	while (++y < data()->rows - 1)
 	{
@@ -37,38 +48,39 @@ void	print_map(void)
 		while (++x < data()->line_length - 1)
 		{
 			plot_line(&cmap()->map[y][x], &cmap()->map[y][x + 1]);
-		 	plot_line(&cmap()->map[y][x], &cmap()->map[y + 1][x]);
+			plot_line(&cmap()->map[y][x], &cmap()->map[y + 1][x]);
 			if (y == 0)
 				plot_line(&cmap()->map[data()->rows - 1][x],
 					&cmap()->map[data()->rows - 1][x + 1]);
 		}
-			plot_line(&cmap()->map[y][data()->line_length - 1], &cmap()->map[y
-				+ 1][data()->line_length - 1]);  
-	}  
-
+		plot_line(&cmap()->map[y][data()->line_length - 1], &cmap()->map[y
+			+ 1][data()->line_length - 1]);
+	}
 }
 
 void	print_original_map(void)
 {
-	 int	x = -1;
-	 int	y;
+	int	x;
+	int	y;
 
+	x = -1;
 	y = -1;
 	while (++y < data()->rows - 1)
 	{
 		x = -1;
 		while (++x < data()->line_length - 1)
 		{
-			plot_line(&cmap()->original_map[y][x], &cmap()->original_map[y][x + 1]);
-		 	plot_line(&cmap()->original_map[y][x], &cmap()->original_map[y + 1][x]);
+			plot_line(&cmap()->original_map[y][x], &cmap()->original_map[y][x
+				+ 1]);
+			plot_line(&cmap()->original_map[y][x], &cmap()->original_map[y
+				+ 1][x]);
 			if (y == 0)
 				plot_line(&cmap()->original_map[data()->rows - 1][x],
 					&cmap()->original_map[data()->rows - 1][x + 1]);
 		}
-			plot_line(&cmap()->original_map[y][data()->line_length - 1], &cmap()->original_map[y
-				+ 1][data()->line_length - 1]);  
-	}  
-
+		plot_line(&cmap()->original_map[y][data()->line_length - 1],
+			&cmap()->original_map[y + 1][data()->line_length - 1]);
+	}
 }
 
 int	limits2(int y, int x)
@@ -88,24 +100,4 @@ int	limits(void)
 				data()->line_length - 1)))
 		return (0);
 	return (1);
-}
-
-void	limit(void)
-{
-	
-	if (!limits())
-	{
-		if (cmap()->spacing > 5)
-		{
-			cmap()->spacing -= 5;
-			get_point_map(data()->file);
-		}
-		else
-		{
-			cmap()->elevation = 1;
-			cmap()->spacing = 20;
-			cmap()->offset_x = 500;
-			cmap()->offset_y = 400;
-		}
-	}
 }

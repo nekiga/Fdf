@@ -6,31 +6,31 @@
 /*   By: garibeir < garibeir@student.42lisboa.com > +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/01 16:47:20 by garibeir          #+#    #+#             */
-/*   Updated: 2023/04/23 17:42:22 by garibeir         ###   ########.fr       */
+/*   Updated: 2023/09/13 14:26:28 by garibeir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "../fdf.h"
 
- #include "../fdf.h"
-
-t_data *data(void)
+t_data	*data(void)
 {
-    static t_data data;
+	static t_data	data;
 
-    return (&data);
+	return (&data);
 }
 
-t_imge *cimg(void)
+t_imge	*cimg(void)
 {
-    static t_imge img;
+	static t_imge	img;
 
-    return (&img);
+	return (&img);
 }
 
-t_point *cpoint(void)
+t_point	*cpoint(void)
 {
-    static t_point point;
-    return (&point);
+	static t_point	point;
+
+	return (&point);
 }
 
 t_map	*cmap(void)

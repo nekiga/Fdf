@@ -6,12 +6,12 @@
 /*   By: garibeir < garibeir@student.42lisboa.com > +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/01 16:47:34 by garibeir          #+#    #+#             */
-/*   Updated: 2023/06/04 12:59:43 by garibeir         ###   ########.fr       */
+/*   Updated: 2023/09/13 14:28:41 by garibeir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef KEY_HANDLER_H
-# define KEY_HANDLER_H
+#ifndef KEYHANDLER_H
+# define KEYHANDLER_H
 
 # define ESC_KEY	65307
 # define KEY_SPACE 32
@@ -38,7 +38,7 @@
 # define EIGHT 56
 # define SEVEN 55
 
-int key_handler(int key);
-
+int	key_handler(int key);
+int	key_handler_sub(int key);
 
 #endif
